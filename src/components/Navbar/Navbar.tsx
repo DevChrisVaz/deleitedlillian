@@ -1,8 +1,9 @@
-import { selectCartState } from '@/features/slices/cartSlice';
+import { removeItem, selectCartState } from '@/features/slices/cartSlice';
 import Image from 'next/image';
 import Link from 'next/link';
+import numeral from 'numeral';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 export interface NavbarProps { }
 
 const Navbar: React.FC<NavbarProps> = () => {
@@ -10,7 +11,12 @@ const Navbar: React.FC<NavbarProps> = () => {
 	const [cartTotal, setCartTotal] = useState<number>(0);
 
 	const cartState = useSelector(selectCartState);
+	const dispatch = useDispatch();
 	// const cartTotal = useSelector(selectCartTotal);
+
+	const handleRemoveFromCart = (productId: string) => {
+		dispatch(removeItem(productId));
+	}
 
 	useEffect(() => {
 		let total: number = 0;
@@ -53,32 +59,34 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 							<div className="cart-btn">
 								<Link href="shopping-cart"><i className="icon flaticon-commerce"></i> {totalItems > 0 && <span className="count">{totalItems}</span>} </Link>
+								{
+									cartState.length > 0 &&
+									<div className="shopping-cart">
+										<ul className="shopping-cart-items">
+											{
+												cartState.slice(0, 2).map((item, index) => {
+													return (
+														<li className="cart-item" key={index}>
+															<Image className="thumb" src={process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0]} width={300} height={300} alt="" />
+															{/* <img src={} alt="#" className="thumb" /> */}
+															<span className="item-name">{item.product.name}</span>
+															<span className="item-quantity">{item.qty} x <span className="item-amount">{numeral(item.product.price).format("$0,0.00")}</span></span>
+															<Link href={"/product-details?id=" + item.product.uuid} className="product-detail"></Link>
+															<button className="remove-item" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")}><span className="fa fa-times"></span></button>
+														</li>
+													)
+												})
+											}
+										</ul>
 
-								<div className="shopping-cart">
-									<ul className="shopping-cart-items">
-										<li className="cart-item">
-											<img src="https://via.placeholder.com/300x300" alt="#" className="thumb" />
-											<span className="item-name">Birthday Cake</span>
-											<span className="item-quantity">1 x <span className="item-amount">$84.00</span></span>
-											<a href="shop-single.html" className="product-detail"></a>
-											<button className="remove-item"><span className="fa fa-times"></span></button>
-										</li>
-
-										<li className="cart-item">
-											<img src="https://via.placeholder.com/300x300" alt="#" className="thumb" />
-											<span className="item-name">French Macaroon</span>
-											<span className="item-quantity">1 x <span className="item-amount">$13.00</span></span>
-											<a href="shop-single.html" className="product-detail"></a>
-											<button className="remove-item"><span className="fa fa-times"></span></button>
-										</li>
-									</ul>
-
-									<div className="cart-footer">
-										<div className="shopping-cart-total"><strong>Subtotal:</strong> $97.00</div>
-										<a href="cart.html" className="theme-btn">View Cart</a>
-										<a href="checkout.html" className="theme-btn">Checkout</a>
+										<div className="cart-footer">
+											<div className="shopping-cart-total"><strong>Subtotal:</strong> {numeral(cartTotal).format("$0,0.00")}</div>
+											<Link href="/shopping-cart" className="theme-btn">Ver carrito</Link>
+											<Link href="/checkout" className="theme-btn">Cotizar</Link>
+										</div>
 									</div>
-								</div>
+								}
+
 							</div>
 
 

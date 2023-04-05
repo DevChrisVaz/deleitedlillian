@@ -78,7 +78,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 														<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
 														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value="1" /> </div></td>
 														<td className="product-subtotal"><span className="amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span></td>
-														<td className="product-remove"> <a href="#" className="remove"><span className="fa fa-times"></span></a></td>
+														<td className="product-remove"> <a className="remove" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")} style={{ cursor: "pointer" }}><span className="fa fa-times"></span></a></td>
 													</tr>
 												)
 											})
@@ -88,7 +88,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 							</div>
 
 							<div className="cart-options clearfix">
-								<div className="pull-left">
+								<div className="pull-left" style={{ visibility: "hidden" }}>
 									<div className="apply-coupon clearfix">
 										<div className="form-group clearfix">
 											<input type="text" name="coupon-code" value="" placeholder="Coupon Code" />
@@ -112,7 +112,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 									<li><h3>Total del carrito</h3></li>
 									<li className="clearfix"><span className="col">Subtotal</span><span className="col price">{numeral(cartTotal).format("$0,0.00")}</span></li>
 									<li className="clearfix"><span className="col">Total</span><span className="col total-price">{numeral(cartTotal).format("$0,0.00")}</span></li>
-									<li className="text-right"><button type="submit" className="theme-btn proceed-btn">Proceder a cotizar</button></li>
+									<li className="text-right"><button type="button" onClick={() => router.push("/checkout")} className="theme-btn proceed-btn">Proceder a cotizar</button></li>
 								</ul>
 							</div>
 						</div>

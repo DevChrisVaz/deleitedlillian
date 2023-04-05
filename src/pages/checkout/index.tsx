@@ -1,10 +1,80 @@
+import CreateQuoteUseCase from '@/architecture/application/usecases/quote/CreateQuoteUseCase';
+import Quote from '@/architecture/domain/entities/Quote';
+import QuoteErrors from '@/architecture/domain/entities/errors/QuoteErrors';
+import CreateQuoteException from '@/architecture/domain/exceptions/quote-exceptions/CreateCategoryException';
+import QuoteRepo from '@/architecture/infrastructure/implementations/httpRequest/axios/QuoteRepo';
+import QuoteValidationsRepo from '@/architecture/infrastructure/implementations/validations/QuoteValidationsRepo';
 import { Layout } from '@/components/Layout';
+import { clearCart, selectCartState } from '@/features/slices/cartSlice';
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import numeral from 'numeral';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 export interface CheckoutProps { }
 
 const Checkout: React.FC<CheckoutProps> = () => {
+	const [cartTotal, setCartTotal] = useState<number>(0);
+	const [initialValues, setInitialValues] = useState<Quote>({
+		firstName: "",
+		lastName: "",
+		address: "",
+		addressDetails: "",
+		city: "",
+		zip: "",
+		email: "",
+		phone: "",
+		details: "",
+		products: []
+	});
+	const [errors, setErrors] = useState<QuoteErrors>({
+	});
+
+	const router = useRouter();
+	const cartState = useSelector(selectCartState);
+	const dispatch = useDispatch();
+
+	const quoteRepo = new QuoteRepo();
+	const quoteValidationsRepo = new QuoteValidationsRepo();
+	const createQuoteUseCase = new CreateQuoteUseCase(quoteRepo, quoteValidationsRepo);
+
+	const submitCheckoutForm = async (values: Quote) => {
+		try {
+			const { status } = await createQuoteUseCase.run(values);
+			if (status === 201) {
+				// await setToastOptions({
+				// 	message: "Usuario creado con éxito",
+				// 	type: "success"
+				// });
+				// showResponseToast();
+				// navigate(-1);
+				dispatch(clearCart());
+				router.push("/");
+			}
+		} catch (err: any) {
+			if (err instanceof CreateQuoteException && err.cause) setErrors(err.cause);
+			alert("No se pudo solicitar la cotización");
+		}
+	}
+
+	useEffect(() => {
+		let totalPrice = 0;
+		let products: any = [];
+		cartState.forEach(p => {
+			if (p.product.price) totalPrice += (p.product.price * p.qty);
+			if (p.product.uuid) products.push({
+				product: p.product.uuid,
+				qty: p.qty
+			});
+		});
+		setCartTotal(totalPrice);
+		setInitialValues({
+			...initialValues,
+			products
+		})
+	}, [cartState]);
+
 	return (
 		<>
 			<Head>
@@ -22,41 +92,41 @@ const Checkout: React.FC<CheckoutProps> = () => {
 				</section>
 				<section className="checkout-page">
 					<div className="auto-container">
-						
+
 						{/* <div className="default-links">
 							<div className="message-box with-icon info"><div className="icon-box"><span className="icon fa fa-info"></span></div> Have a coupon? <a href="#">Click here to enter your code</a></div>
 						</div> */}
 
-						
+
 						<div className="checkout-form">
 							<form method="post" action="checkout.html">
 								<div className="row clearfix">
-									
+
 									<div className="column col-lg-6 col-md-12 col-sm-12">
 										<div className="inner-column">
 											<div className="sec-title">
 												<h3>Detalles de cotización</h3>
 											</div>
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Nombre <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="" />
 											</div>
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Apellido <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="" />
 											</div>
 
-											
+
 											{/* <div className="form-group">
 												<div className="field-label">Company name (optional)</div>
 												<input type="text" name="field-name" value="" placeholder="" />
 											</div> */}
 
-											
+
 											{/* <div className="form-group">
 												<div className="field-label">Country <sup>*</sup></div>
 												<select name="billing_country" className="select2 sortby-select" autocomplete="country">
@@ -312,7 +382,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 												</select>
 											</div> */}
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Dirección <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="Calle número de casa colonia" />
@@ -322,31 +392,31 @@ const Checkout: React.FC<CheckoutProps> = () => {
 												<input type="text" name="field-name" value="" placeholder="Número interior" />
 											</div>
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Ciudad <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="" required />
 											</div>
 
-											
+
 											{/* <div className="form-group">
 												<div className="field-label">State / County <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="" required />
 											</div> */}
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Código postal <sup>*</sup></div>
 												<input type="text" name="field-name" value="" placeholder="" required />
 											</div>
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Celular</div>
 												<input type="text" name="field-name" value="" placeholder="" />
 											</div>
 
-											
+
 											<div className="form-group">
 												<div className="field-label">Dirección de correo</div>
 												<input type="text" name="field-name" value="" placeholder="" />
@@ -354,14 +424,14 @@ const Checkout: React.FC<CheckoutProps> = () => {
 										</div>
 									</div>
 
-									
+
 									<div className="column col-lg-6 col-md-12 col-sm-12">
 										<div className="inner-column">
 											<div className="sec-title">
 												<h3>Información adicional</h3>
 											</div>
 
-											
+
 											<div className="form-group ">
 												<div className="field-label">Instrucciones adicionales (optional)</div>
 												<textarea className="" placeholder="Notes about your order,e.g. special notes for delivery." ></textarea>
@@ -371,7 +441,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 								</div>
 							</form>
 						</div>
-						
+
 						<div className="order-box">
 							<table>
 								<thead>
@@ -381,88 +451,58 @@ const Checkout: React.FC<CheckoutProps> = () => {
 									</tr>
 								</thead>
 								<tbody>
-									<tr className="cart-item">
-										<td className="product-name">Birthday Cake&nbsp;
-											<strong className="product-quantity">× 1</strong>
-										</td>
-										<td className="product-total">
-											<span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>84.00</span>
-										</td>
-									</tr>
-
-									<tr className="cart-item">
-										<td className="product-name">Candy Lollipop&nbsp;
-											<strong className="product-quantity">× 1</strong>
-										</td>
-										<td className="product-total">
-											<span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>84.00</span>
-										</td>
-									</tr>
-
-									<tr className="cart-item">
-										<td className="product-name">Classic Macaroon&nbsp;
-											<strong className="product-quantity">× 1</strong>
-										</td>
-										<td className="product-total">
-											<span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>84.00</span>
-										</td>
-									</tr>
-
-									<tr className="cart-item">
-										<td className="product-name">Coffee Cake&nbsp;
-											<strong className="product-quantity">× 1</strong>
-										</td>
-										<td className="product-total">
-											<span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>84.00</span>
-										</td>
-									</tr>
-
-									<tr className="cart-item">
-										<td className="product-name">French Macaroon&nbsp;
-											<strong className="product-quantity">× 1</strong>
-										</td>
-										<td className="product-total">
-											<span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">$</span>84.00</span>
-										</td>
-									</tr>
+									{
+										cartState.length > 0 && cartState.map((item, index) => {
+											return (
+												<tr className="cart-item" key={index}>
+													<td className="product-name">{item.product.name}&nbsp;
+														<strong className="product-quantity">× {item.qty}</strong>
+													</td>
+													<td className="product-total">
+														<span className="woocommerce-Price-amount amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span>
+													</td>
+												</tr>
+											)
+										})
+									}
 								</tbody>
 								<tfoot>
 									<tr className="cart-subtotal">
 										<th>Subtotal</th>
-										<td><span className="amount">$186.00</span></td>
+										<td><span className="amount">{numeral(cartTotal).format("$0,0.00")}</span></td>
 									</tr>
 									<tr className="order-total">
 										<th>Total</th>
-										<td><strong className="amount">$186.00</strong> </td>
+										<td><strong className="amount">{numeral(cartTotal).format("$0,0.00")}</strong> </td>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
-						
 
-						
+
+
 						<div className="payment-box">
 							<div className="upper-box">
-								
+
 								<div className="payment-options">
 									<ul>
 										<li>
 											<div className="radio-option">
 												<input type="radio" name="payment-group" id="payment-2" checked />
-													<label htmlFor="payment-2"><strong>Direct Bank Transfer</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
+												<label htmlFor="payment-2"><strong>Direct Bank Transfer</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
 											</div>
 										</li>
 										<li>
 											<div className="radio-option">
 												<input type="radio" name="payment-group" id="payment-1" />
-													<label htmlFor="payment-1"><strong>Check Payments</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
+												<label htmlFor="payment-1"><strong>Check Payments</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
 											</div>
 										</li>
 
 										<li>
 											<div className="radio-option">
 												<input type="radio" name="payment-group" id="payment-3" />
-													<label htmlFor="payment-3"><strong>Cash on Delivery</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
+												<label htmlFor="payment-3"><strong>Cash on Delivery</strong><span className="small-text">Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</span></label>
 											</div>
 										</li>
 									</ul>
@@ -473,7 +513,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 								<a href="#" className="theme-btn"><span className="btn-title">Cotizar</span></a>
 							</div>
 						</div>
-						
+
 					</div>
 				</section>
 			</Layout>
