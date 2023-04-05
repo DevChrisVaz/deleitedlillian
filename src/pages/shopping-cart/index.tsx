@@ -77,7 +77,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 														<td className="product-name"><a href="shop-single.html">{item.product.name}</a></td>
 														<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
 														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value="1" /> </div></td>
-														<td className="product-subtotal"><span className="amount">{numeral(item.product.price * item.qty).format("$0,0.00")}</span></td>
+														<td className="product-subtotal"><span className="amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span></td>
 														<td className="product-remove"> <a href="#" className="remove"><span className="fa fa-times"></span></a></td>
 													</tr>
 												)

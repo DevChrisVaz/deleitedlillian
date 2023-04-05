@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
 import { HYDRATE } from "next-redux-wrapper";
-import Product from "@/domain/entities/Product";
+import Product from "@/architecture/domain/entities/Product";
 
 interface Item {
     product: Product,

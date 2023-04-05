@@ -1,5 +1,6 @@
-import QuoteErrors from "@/domain/entities/errors/QuoteErrors";
-import Quote from "@/domain/entities/Quote";
+import Quote from "../../entities/Quote";
+import QuoteErrors from "../../entities/errors/QuoteErrors";
+
 
 interface IQuoteValidationsRepo {
     create(quote: Quote): Promise<QuoteErrors | null>;

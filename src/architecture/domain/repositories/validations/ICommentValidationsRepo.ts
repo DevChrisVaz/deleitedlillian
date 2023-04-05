@@ -1,5 +1,6 @@
-import Comment from "@/domain/entities/Comment";
-import CommentErrors from "@/domain/entities/errors/CommentErrors";
+import Comment from "../../entities/Comment";
+import CommentErrors from "../../entities/errors/CommentErrors";
+
 
 interface ICommentValidationsRepo {
     create(comment: Comment): Promise<CommentErrors | null>;
