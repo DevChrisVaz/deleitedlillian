@@ -54,10 +54,10 @@
 		var mobileHeaderContent = $('.main-header .nav-outer .outer-box').html();
 		var stickyMenuContent = $('.main-header .nav-outer .main-menu').html();
 		$('.mobile-menu').append('<div class="close-btn"><span class="icon fa fa-times"></span></div>');
-		$('.mobile-header .nav-outer').append('<div class="mobile-nav-toggler"><span class="icon fa fa-bars"></span></div>');
-		$('.mobile-menu .menu-box').append(mobileMenuContent);
-		$('.mobile-header .nav-outer').append(mobileHeaderContent);
-		$('.sticky-header .main-menu').append(stickyMenuContent);
+		// $('.mobile-header .nav-outer').append('<div class="mobile-nav-toggler"><span class="icon fa fa-bars"></span></div>');
+		// $('.mobile-menu .menu-box').append(mobileMenuContent);
+		// $('.mobile-header .nav-outer').append(mobileHeaderContent);
+		// $('.sticky-header .main-menu').append(stickyMenuContent);
 		$('.sticky-header .main-menu .navbar-collapse').addClass('show');
 		$('.mobile-menu .menu-box .navbar-collapse').addClass('show');
 		$('.mobile-menu .close-btn').on('click', function() {

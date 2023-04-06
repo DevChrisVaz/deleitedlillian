@@ -112,7 +112,17 @@ const Navbar: React.FC<NavbarProps> = () => {
 						<div className="mobile-nav-toggler"><span className="icon flaticon-menu"></span></div>
 
 						<nav className="main-menu">
+							<div className="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+								<ul className="navigation menu-left clearfix">
+									<li><Link href="/">Inicio</Link></li>
+									<li><Link href="/about">Conócenos</Link></li>
+								</ul>
 
+								<ul className="navigation menu-right clearfix">
+									<li><Link href="/shop">Tienda</Link></li>
+									<li><Link href="/contact">Contacto</Link></li>
+								</ul>
+							</div>
 						</nav>
 					</div>
 				</div>
@@ -123,7 +133,10 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 
 				<div className="nav-outer clearfix">
-
+					<div className="cart-btn">
+						<Link href="shopping-cart"><i className="icon flaticon-commerce"></i> {totalItems > 0 && <span className="count">{totalItems}</span>} </Link>
+					</div>
+					<div className="mobile-nav-toggler"><span className="icon fa fa-bars"></span></div>
 				</div>
 			</div>
 
@@ -131,7 +144,17 @@ const Navbar: React.FC<NavbarProps> = () => {
 			<div className="mobile-menu">
 				<nav className="menu-box">
 					<div className="nav-logo"><Link href="/"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={150} height={80} alt="" title="" /></Link></div>
+					<div className="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+						<ul className="navigation menu-left clearfix">
+							<li><Link href="/">Inicio</Link></li>
+							<li><Link href="/about">Conócenos</Link></li>
+						</ul>
 
+						<ul className="navigation menu-right clearfix">
+							<li><Link href="/shop">Tienda</Link></li>
+							<li><Link href="/contact">Contacto</Link></li>
+						</ul>
+					</div>
 				</nav>
 			</div>
 
