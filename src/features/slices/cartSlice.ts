@@ -47,6 +47,16 @@ export const cartSlice = createSlice({
                 return p;
             });
         },
+        changeProductQty(state, action) {
+            state.products = state.products.map(p => {
+                if (p.product.uuid === action.payload.uuid) {
+                    // if (p.qty > 0) {
+                        p.qty = action.payload.qty
+                    // }
+                }
+                return p;
+            });
+        },
         clearCart(state) {
             state.products = [];
         }
@@ -61,7 +71,7 @@ export const cartSlice = createSlice({
     }
 });
 
-export const { addItem, removeItem, increaseProductQty, decreaseProductQty, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, increaseProductQty, decreaseProductQty, changeProductQty, clearCart } = cartSlice.actions;
 
 export const selectCartState = (state: AppState) => state.cart.products;
 

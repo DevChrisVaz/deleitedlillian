@@ -110,7 +110,7 @@ const Shop: React.FC<ShopProps> = () => {
 								<div className="our-shop">
 									<div className="shop-upper-box clearfix">
 										<div className="items-label">Mostrando {currentPage === 1 ? currentPage : 12 * (currentPage - 1) + 1} - {(12 * currentPage) > totalProducts ? totalProducts : (12 * currentPage)} de {totalProducts} resultados</div>
-										<div className="orderby">
+										<div className="orderby" style={{ visibility: "hidden" }}>
 											<select name="orderby" className="sortby-select select2-offscreen">
 												<option value="popularity">Sort by popularity</option>
 												<option value="rating" >Sort by average rating</option>
