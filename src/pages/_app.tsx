@@ -13,7 +13,7 @@ function App({ Component, pageProps }: AppProps) {
     setTimeout(() => {
       document.body.appendChild(mainScript);
       document.body.appendChild(sliderScript);
-    }, 3000);
+    }, 1000);
     // setLoading(false);
   }, []);
 
