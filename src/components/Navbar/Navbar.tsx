@@ -104,24 +104,6 @@ const Navbar: React.FC<NavbarProps> = () => {
 				<div className="auto-container clearfix">
 
 					<div className="logo">
-						<Link href="/" title="Sticky Logo"><img src="assets/images/logo-small.png" alt="Sticky Logo" /></Link>
-					</div>
-
-
-					<div className="nav-outer">
-						<div className="mobile-nav-toggler"><span className="icon flaticon-menu"></span></div>
-
-						<nav className="main-menu">
-
-						</nav>
-					</div>
-				</div>
-			</div>
-
-			<div className="sticky-header">
-				<div className="auto-container clearfix">
-
-					<div className="logo">
 						<Link href="/" title="Sticky Logo"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={190} height={100} alt="Sticky Logo" /></Link>
 					</div>
 
@@ -137,7 +119,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 			</div>
 
 			<div className="mobile-header">
-				<div className="logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={100} height={100} alt="" title="" /></a></div>
+				<div className="logo"><Link href="/"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={100} height={100} alt="" title="" /></Link></div>
 
 
 				<div className="nav-outer clearfix">
@@ -148,7 +130,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 			<div className="mobile-menu">
 				<nav className="menu-box">
-					<div className="nav-logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={150} height={80} alt="" title="" /></a></div>
+					<div className="nav-logo"><Link href="/"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={150} height={80} alt="" title="" /></Link></div>
 
 				</nav>
 			</div>
