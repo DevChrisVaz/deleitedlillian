@@ -20,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Loader />
+      {/* <Loader /> */}
       <Component {...pageProps} />
     </>
   )
