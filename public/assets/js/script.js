@@ -18,10 +18,10 @@
 			var sticky_header = $('.main-header .sticky-header');
 			if (windowpos > 700) {
 				siteHeader.addClass('fixed-header');
-				// scrollLink.fadeIn(300);
+				scrollLink.fadeIn(300);
 			} else{
 				siteHeader.removeClass('fixed-header');
-				// scrollLink.fadeOut(300);
+				scrollLink.fadeOut(300);
 			}
 		}
 	}
@@ -640,7 +640,7 @@
    ========================================================================== */
 	
 	$(window).on('load', function() {
-		// handlePreloader();
+		handlePreloader();
 		defaultMasonry();
 	});	
 

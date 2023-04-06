@@ -10,7 +10,7 @@ export default function Document() {
         <link href="assets/plugins/revolution/css/settings.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/revolution/css/layers.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/revolution/css/navigation.css" rel="stylesheet" type="text/css" />
-        <link href="css/responsive.css" rel="stylesheet" />
+        <link href="assets/css/responsive.css" rel="stylesheet" />
         <script src="assets/js/jquery.js" async></script>
         <script src="assets/js/appear.js" async></script>
         <script src="assets/js/bootstrap.min.js" async></script>

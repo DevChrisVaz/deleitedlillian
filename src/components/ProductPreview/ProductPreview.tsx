@@ -1,5 +1,6 @@
 import Product from '@/architecture/domain/entities/Product';
 import { addItem, removeItem, selectCartState } from '@/features/slices/cartSlice';
+import useImage from '@/hooks/useImage';
 import Image from 'next/image';
 import Link from 'next/link';
 import numeral from 'numeral';
@@ -14,6 +15,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ product }) => {
 
 	const dispatch = useDispatch();
 	const cart = useSelector(selectCartState);
+	const image = useImage();
 
 	const handleAddItem = (product: Product) => {
         dispatch(addItem(product));
@@ -34,7 +36,7 @@ const ProductPreview: React.FC<ProductPreviewProps> = ({ product }) => {
 				<div className="image-box">
 					{/* Nota si está en descuento */}
 					{/* <div className="sale-tag">sale!</div> */}
-					<figure className="image"><Link href={"/product-details?id=" + product.uuid}><Image src={process.env.NEXT_PUBLIC_API_URL_PUBLIC + product.images[0]} width={300} height={300} alt="" /></Link></figure>
+					<figure className="image"><Link href={"/product-details?id=" + product.uuid}><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + product.images[0])} width={300} height={300} alt="" /></Link></figure>
 					{
 						isInCart(product.uuid ?? "") ? 
 						<div className="btn-box" onClick={() => handleRemoveFromCart(product.uuid ?? "")}>

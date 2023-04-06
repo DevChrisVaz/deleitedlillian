@@ -1,4 +1,5 @@
 import { removeItem, selectCartState } from '@/features/slices/cartSlice';
+import useImage from '@/hooks/useImage';
 import Image from 'next/image';
 import Link from 'next/link';
 import numeral from 'numeral';
@@ -12,6 +13,7 @@ const CartWidget: React.FC<CartWidgetProps> = () => {
 
 	const cartState = useSelector(selectCartState);
 	const dispatch = useDispatch();
+	const image = useImage();
 	// const cartTotal = useSelector(selectCartTotal);
 
 	const handleRemoveFromCart = (productId: string) => {
@@ -40,7 +42,7 @@ const CartWidget: React.FC<CartWidgetProps> = () => {
 							cartState.slice(0, 2).map((item, index) => {
 								return (
 									<li className="cart-item" key={index}>
-										<Image className="thumb" src={process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0]} width={300} height={300} alt="" />
+										<Image className="thumb" src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" />
 										{/* <img src={} alt="#" className="thumb" /> */}
 										<span className="item-name">{item.product.name}</span>
 										<span className="item-quantity">{item.qty} x <span className="item-amount">{numeral(item.product.price).format("$0,0.00")}</span></span>

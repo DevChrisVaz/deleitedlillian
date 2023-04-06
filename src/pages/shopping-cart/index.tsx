@@ -1,5 +1,6 @@
 import { Layout } from '@/components/Layout';
 import { decreaseProductQty, increaseProductQty, removeItem, selectCartState } from '@/features/slices/cartSlice';
+import useImage from '@/hooks/useImage';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +16,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const cart = useSelector(selectCartState);
+	const image = useImage();
 
 	const handleRemoveFromCart = (productId: string) => {
 		dispatch(removeItem(productId));
@@ -73,7 +75,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 											cart.map((item, index) => {
 												return (
 													<tr className="cart-item" key={index}>
-														<td className="product-thumbnail"><a href="shop-single.html"><Image src={process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0]} width={300} height={300} alt="" /></a></td>
+														<td className="product-thumbnail"><a href="shop-single.html"><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" /></a></td>
 														<td className="product-name"><a href="shop-single.html">{item.product.name}</a></td>
 														<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
 														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value="1" /> </div></td>

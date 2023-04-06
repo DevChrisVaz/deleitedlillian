@@ -16,76 +16,78 @@ export interface ShopProps { }
 
 const Shop: React.FC<ShopProps> = () => {
 	const [products, setProducts] = useState<Product[]>([]);
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [totalProducts, setTotalProducts] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageButtons, setPageButtons] = useState<any>([]);
-    const [currentFilter, setCurrentFilter] = useState<ProductFilters>({});
-    const [initialValues, setInitialValues] = useState<ProductFilters>({
-        category: "",
-        searchBy: ""
-    });
+	const [categories, setCategories] = useState<Category[]>([]);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [totalProducts, setTotalProducts] = useState(0);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [pageButtons, setPageButtons] = useState<any>([]);
+	const [currentFilter, setCurrentFilter] = useState<ProductFilters>({});
+	const [initialValues, setInitialValues] = useState<ProductFilters>({
+		category: "",
+		searchBy: ""
+	});
 
 	const router = useRouter();
-    const { page } = router.query;
+	const { page } = router.query;
 
 	const productRepo = new ProductRepo();
-    const categoryRepo = new CategoryRepo();
-    const getManyProductsUseCase = new GetManyProductsUseCase(productRepo);
-    const getAllCategoriesUseCase = new GetAllCategoriesUseCase(categoryRepo);
+	const categoryRepo = new CategoryRepo();
+	const getManyProductsUseCase = new GetManyProductsUseCase(productRepo);
+	const getAllCategoriesUseCase = new GetAllCategoriesUseCase(categoryRepo);
 
 	const getFilteredProducts = async (filter: ProductFilters) => {
-        try {
-            setLoading(true);
-            const { data, status } = await getManyProductsUseCase.run(filter);
-            if (status === 200 && data) {
-                setCurrentFilter(filter);
-                setProducts(data.products);
-                setTotalProducts(data.total);
-            }
-            setLoading(false);
-        } catch (err) {
+		try {
+			setLoading(true);
+			const { data, status } = await getManyProductsUseCase.run(filter);
+			if (status === 200 && data) {
+				setCurrentFilter(filter);
+				setProducts(data.products);
+				setTotalProducts(data.total);
+			}
+			setLoading(false);
+		} catch (err) {
 
-        }
-    }
+		}
+	}
 
-    const getAllCategories = async () => {
-        try {
-            const { data, status } = await getAllCategoriesUseCase.run();
-            if (status === 200 && data) {
-                setCategories(data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
+	const getAllCategories = async () => {
+		try {
+			const { data, status } = await getAllCategoriesUseCase.run();
+			if (status === 200 && data) {
+				setCategories(data);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 
-    useEffect(() => {
-        getFilteredProducts(currentFilter);
-        getAllCategories();
-    }, []);
+	useEffect(() => {
+		getFilteredProducts(currentFilter);
+		getAllCategories();
+	}, []);
 
-    useEffect(() => {
-        if (totalProducts > 0) {
-            setPageButtons(Array.from({ length: Math.ceil(totalProducts / 12) }, (_, i) => i + 1));
-            // setPageButtons()
-        }
-    }, [totalProducts]);
+	useEffect(() => {
+		if (totalProducts > 0) {
+			setPageButtons(Array.from({ length: Math.ceil(totalProducts / 12) }, (_, i) => i + 1));
+			// setPageButtons()
+		}
+	}, [totalProducts]);
 
-    useEffect(() => {
-        let temp: number;
-        temp = page ? (Array.isArray(page) ? parseInt(page[0]) : parseInt(page)) : 0;
-        setCurrentPage(temp);
-    }, [page]);
+	useEffect(() => {
+		if (page) {
+			let temp: number;
+			temp = (Array.isArray(page) ? parseInt(page[0]) : parseInt(page));
+			setCurrentPage(temp);
+		}
+	}, [page]);
 
-    useEffect(() => {
-        const filter: ProductFilters = {
-            ...currentFilter,
-            page: currentPage
-        }
-        getFilteredProducts(filter);
-    }, [currentPage]);
+	useEffect(() => {
+		const filter: ProductFilters = {
+			...currentFilter,
+			page: currentPage
+		}
+		getFilteredProducts(filter);
+	}, [currentPage]);
 
 	return (
 		<>
@@ -122,13 +124,13 @@ const Shop: React.FC<ShopProps> = () => {
 									</div>
 
 									<div className="row clearfix">
-									{
-                                        products.length > 0 ?
-                                            products.map((product, index) => (
-                                                <ProductPreview key={index} product={product} />
-                                            )) :
-                                            <span>No se encontraron productos</span>
-                                    }
+										{
+											products.length > 0 ?
+												products.map((product, index) => (
+													<ProductPreview key={index} product={product} />
+												)) :
+												<span>No se encontraron productos</span>
+										}
 									</div>
 								</div>
 							</div>

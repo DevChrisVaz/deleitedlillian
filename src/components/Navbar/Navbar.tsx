@@ -1,4 +1,5 @@
 import { removeItem, selectCartState } from '@/features/slices/cartSlice';
+import useImage from '@/hooks/useImage';
 import Image from 'next/image';
 import Link from 'next/link';
 import numeral from 'numeral';
@@ -12,6 +13,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 	const cartState = useSelector(selectCartState);
 	const dispatch = useDispatch();
+	const image = useImage();
 	// const cartTotal = useSelector(selectCartTotal);
 
 	const handleRemoveFromCart = (productId: string) => {
@@ -67,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 												cartState.slice(0, 2).map((item, index) => {
 													return (
 														<li className="cart-item" key={index}>
-															<Image className="thumb" src={process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0]} width={300} height={300} alt="" />
+															<Image className="thumb" src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" />
 															{/* <img src={} alt="#" className="thumb" /> */}
 															<span className="item-name">{item.product.name}</span>
 															<span className="item-quantity">{item.qty} x <span className="item-amount">{numeral(item.product.price).format("$0,0.00")}</span></span>
@@ -98,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 				</div>
 			</div>
 
-			{/* <div className="sticky-header">
+			<div className="sticky-header">
 				<div className="auto-container clearfix">
 
 					<div className="logo">
@@ -114,7 +116,25 @@ const Navbar: React.FC<NavbarProps> = () => {
 						</nav>
 					</div>
 				</div>
-			</div> */}
+			</div>
+
+			<div className="sticky-header">
+				<div className="auto-container clearfix">
+
+					<div className="logo">
+						<Link href="/" title="Sticky Logo"><img src="assets/images/logo-small.png" alt="Sticky Logo" /></Link>
+					</div>
+
+
+					<div className="nav-outer">
+						<div className="mobile-nav-toggler"><span className="icon flaticon-menu"></span></div>
+
+						<nav className="main-menu">
+
+						</nav>
+					</div>
+				</div>
+			</div>
 
 			<div className="mobile-header">
 				<div className="logo"><a href="index.html"><img src="assets/images/logo-small.png" alt="" title="" /></a></div>
