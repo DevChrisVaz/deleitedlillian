@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 				<div className="auto-container clearfix">
 
 					<div className="logo">
-						<Link href="/" title="Sticky Logo"><img src="assets/images/logo-small.png" alt="Sticky Logo" /></Link>
+						<Link href="/" title="Sticky Logo"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={190} height={100} alt="Sticky Logo" /></Link>
 					</div>
 
 
@@ -137,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 			</div>
 
 			<div className="mobile-header">
-				<div className="logo"><a href="index.html"><img src="assets/images/logo-deleite-cafe_oscuro_small.png" alt="" title="" /></a></div>
+				<div className="logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={100} height={100} alt="" title="" /></a></div>
 
 
 				<div className="nav-outer clearfix">
@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 			<div className="mobile-menu">
 				<nav className="menu-box">
-					<div className="nav-logo"><a href="index.html"><img src="assets/images/logo-deleite-cafe_oscuro_small.png" alt="" title="" /></a></div>
+					<div className="nav-logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={100} height={100} alt="" title="" /></a></div>
 
 				</nav>
 			</div>
