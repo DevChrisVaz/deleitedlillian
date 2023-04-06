@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 			<div className="mobile-menu">
 				<nav className="menu-box">
-					<div className="nav-logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={100} height={100} alt="" title="" /></a></div>
+					<div className="nav-logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={150} height={80} alt="" title="" /></a></div>
 
 				</nav>
 			</div>
