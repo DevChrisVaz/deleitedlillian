@@ -640,7 +640,7 @@
    ========================================================================== */
 	
 	$(window).on('load', function() {
-		handlePreloader();
+		// handlePreloader();
 		defaultMasonry();
 	});	
 

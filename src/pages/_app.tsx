@@ -10,12 +10,12 @@ function App({ Component, pageProps }: AppProps) {
     const sliderScript = document.createElement("script");
     mainScript.src = "assets/js/script.js";
     sliderScript.src = "assets/js/main-slider-script.js";
-    setTimeout(() => {
+    // setTimeout(() => {
       document.body.appendChild(mainScript);
       document.body.appendChild(sliderScript);
-    }, 1000);
+    // }, 1000);
     // setLoading(false);
-  }, []);
+  });
 
   return <Component {...pageProps} />
 }
