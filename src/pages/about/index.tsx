@@ -31,7 +31,7 @@ const About: React.FC<AboutProps> = () => {
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi et dolor ornare pellentesque. Nullam porttitor, odio id facilisis dapibus, mauris dolor rhoncus elit, ultricies nulla eros at dui. In suscipit leo sagittis aliquam. Integer tristique tempus urna. et pharetra dui urna volutpat elit odio at.</p>
 						</div>
 						<div className="btn-box text-center">
-							<a href="#" className="theme-btn btn-style-two regular"><span></span>Productos<span></span></a>
+							<Link href="/shop" className="theme-btn btn-style-two regular"><span></span>Productos<span></span></Link>
 						</div>
 					</div>
 				</section>
@@ -118,7 +118,7 @@ const About: React.FC<AboutProps> = () => {
 										<div className="divider"><img src="assets/images/icons/icon-devider.png" alt="" /></div>
 										<p>Me llamo Lilian Zapien, me considero una mujer emprendedora, creativa y dispuesta a dar todo de mi cuanto algo me apasiona. Después de graduarme de la escuela, me comencé a enamorar de la cocina y pronto me di cuenta de que todo lo que quería hacer era crear pasteles.</p>
 										<div className="btn-box">
-											<Link href="/" className="theme-btn btn-style-two regular alt"><span></span>Productos<span></span></Link>
+											<Link href="/shop" className="theme-btn btn-style-two regular alt"><span></span>Productos<span></span></Link>
 										</div>
 									</div>
 								</div>

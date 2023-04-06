@@ -102,7 +102,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 								</div>
 
 								<div className="pull-right">
-									<button type="button" className="theme-btn cart-btn">Seguir comprando</button>
+									<button type="button" className="theme-btn cart-btn">Seguir cotizando</button>
 								</div>
 							</div>
 						</div>
@@ -114,7 +114,10 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 									<li><h3>Total del carrito</h3></li>
 									<li className="clearfix"><span className="col">Subtotal</span><span className="col price">{numeral(cartTotal).format("$0,0.00")}</span></li>
 									<li className="clearfix"><span className="col">Total</span><span className="col total-price">{numeral(cartTotal).format("$0,0.00")}</span></li>
-									<li className="text-right"><button type="button" onClick={() => router.push("/checkout")} className="theme-btn proceed-btn">Proceder a cotizar</button></li>
+									{
+										cart.length > 0 &&
+										<li className="text-right"><button type="button" onClick={() => router.push("/checkout")} className="theme-btn proceed-btn">Proceder a cotizar</button></li>
+									}
 								</ul>
 							</div>
 						</div>

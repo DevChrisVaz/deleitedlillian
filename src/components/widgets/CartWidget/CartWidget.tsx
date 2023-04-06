@@ -32,7 +32,7 @@ const CartWidget: React.FC<CartWidgetProps> = () => {
 	}, [cartState]);
 
 	return (
-		<div className="sidebar-widget cart-widget">
+		<div className="sidebar-widget cart-widget" style={totalItems < 1 ? { display: "none" } :{}}>
 			<div className="widget-content">
 				<h3 className="widget-title">Carrito</h3>
 
