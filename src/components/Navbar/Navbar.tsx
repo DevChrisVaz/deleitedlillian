@@ -137,7 +137,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 			</div>
 
 			<div className="mobile-header">
-				<div className="logo"><a href="index.html"><img src="assets/images/logo-small.png" alt="" title="" /></a></div>
+				<div className="logo"><a href="index.html"><img src="assets/images/logo-deleite-cafe_oscuro_small.png" alt="" title="" /></a></div>
 
 
 				<div className="nav-outer clearfix">
@@ -148,7 +148,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
 			<div className="mobile-menu">
 				<nav className="menu-box">
-					<div className="nav-logo"><a href="index.html"><img src="assets/images/logo-small.png" alt="" title="" /></a></div>
+					<div className="nav-logo"><a href="index.html"><img src="assets/images/logo-deleite-cafe_oscuro_small.png" alt="" title="" /></a></div>
 
 				</nav>
 			</div>
