@@ -137,7 +137,12 @@ const Shop: React.FC<ShopProps> = () => {
 											currentPage > 1 &&
 											<div
 												className={"pagination"}
-												onClick={() => setCurrentPage(currentPage - 1)}
+												onClick={() => router.push({
+													pathname: router.pathname,
+													query: {
+														page: currentPage - 1
+													}
+												})}
 											>
 												<svg viewBox="0 0 500 500">
 													<path d="M488.5,274.5L488.5,274.5l1.8-0.5l-2,0.5c-2.4-8.7-4.5-16.9-4.5-24.5c0-8,2.3-16.5,4.7-25.5
@@ -188,7 +193,12 @@ const Shop: React.FC<ShopProps> = () => {
 											pageButtons.length !== currentPage &&
 											<div
 												className={"pagination"}
-												onClick={() => setCurrentPage(currentPage + 1)}
+												onClick={() => router.push({
+													pathname: router.pathname,
+													query: {
+														page: currentPage + 1
+													}
+												})}
 											>
 												<svg viewBox="0 0 500 500">
 													<path d="M488.5,274.5L488.5,274.5l1.8-0.5l-2,0.5c-2.4-8.7-4.5-16.9-4.5-24.5c0-8,2.3-16.5,4.7-25.5
