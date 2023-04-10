@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout';
-import { decreaseProductQty, increaseProductQty, removeItem, selectCartState } from '@/features/slices/cartSlice';
+import { changeProductQty, decreaseProductQty, increaseProductQty, removeItem, selectCartState } from '@/features/slices/cartSlice';
 import useImage from '@/hooks/useImage';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -28,6 +28,9 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 
 	const handleDecreaseQty = (productId: string) => {
 		dispatch(decreaseProductQty(productId));
+	}
+	const handleChangeQty = (productId: string, qty: string) => {
+		dispatch(changeProductQty({ uuid: productId, qty: parseInt(qty) }));
 	}
 
 	useEffect(() => {
@@ -78,7 +81,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 														<td className="product-thumbnail"><a href="shop-single.html"><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" /></a></td>
 														<td className="product-name"><a href="shop-single.html">{item.product.name}</a></td>
 														<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
-														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value="1" /> </div></td>
+														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value={item.qty} onChange={(e) => handleChangeQty(item.product.uuid ?? "", e.target.value)} /> </div></td>
 														<td className="product-subtotal"><span className="amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span></td>
 														<td className="product-remove"> <a className="remove" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")} style={{ cursor: "pointer" }}><span className="fa fa-times"></span></a></td>
 													</tr>
