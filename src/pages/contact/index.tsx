@@ -25,7 +25,7 @@ const Contact: React.FC<ContactProps> = () => {
 						<div className="sec-title text-center">
 							<div className="divider"><img src="images/icons/divider_1.png" alt="" /></div>
 							<h2>Contacto</h2>
-							<div className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi et dolor ornare pellentesque. Nullam porttitor,<br /> odio id facilisis, mauris dolor rhoncus elit, ultricies nulla eros at dui. In suscipit leo sagittis aliquam.</div>
+							<div className="text">Si tienes alguna duda, queja o sugerencia no dudes en ponerte en contacto con nosotros, siempre leemos todos sus comentarios. Nos pondremos en contacto con usted lo más pronto posible. Agradecemos su preferencia. <br /> <span style={{ fontSize: "20px", fontWeight: "bold" }}>¡Muchas gracias!</span></div>
 						</div>
 
 						<div className="row clearfix">

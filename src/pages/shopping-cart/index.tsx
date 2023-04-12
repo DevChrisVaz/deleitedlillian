@@ -22,13 +22,6 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 		dispatch(removeItem(productId));
 	}
 
-	const handleIncreaseQty = (productId: string) => {
-		dispatch(increaseProductQty(productId));
-	}
-
-	const handleDecreaseQty = (productId: string) => {
-		dispatch(decreaseProductQty(productId));
-	}
 	const handleChangeQty = (productId: string, qty: string) => {
 		dispatch(changeProductQty({ uuid: productId, qty: parseInt(qty) }));
 	}

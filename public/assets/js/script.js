@@ -503,19 +503,19 @@
 	}
 
 	//Price Range Slider
-	if($('.price-range-slider').length){
-		$( ".price-range-slider" ).slider({
-			range: true,
-			min: 0,
-			max: 90,
-			values: [ 0, 84 ],
-			slide: function( event, ui ) {
-			$( "input.property-amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-			}
-		});
+	// if($('.price-range-slider').length){
+	// 	$( ".price-range-slider" ).slider({
+	// 		range: true,
+	// 		min: 0,
+	// 		max: 90,
+	// 		values: [ 0, 90 ],
+	// 		slide: function( event, ui ) {
+	// 		$( "input.property-amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+	// 		}
+	// 	});
 		
-		$( "input.property-amount" ).val( $( ".price-range-slider" ).slider( "values", 0 ) + " - $" + $( ".price-range-slider" ).slider( "values", 1 ) );	
-	}
+	// 	$( "input.property-amount" ).val( $( ".price-range-slider" ).slider( "values", 0 ) + " - $" + $( ".price-range-slider" ).slider( "values", 1 ) );	
+	// }
 
 	//LightBox / Fancybox
 	if($('.lightbox-image').length) {

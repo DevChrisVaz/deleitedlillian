@@ -28,7 +28,7 @@ const About: React.FC<AboutProps> = () => {
 						</div>
 						<div className="content-box">
 							<span className="devider_icon_one"></span>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nisi et dolor ornare pellentesque. Nullam porttitor, odio id facilisis dapibus, mauris dolor rhoncus elit, ultricies nulla eros at dui. In suscipit leo sagittis aliquam. Integer tristique tempus urna. et pharetra dui urna volutpat elit odio at.</p>
+							<p>Deleite D’lillian nació gracias a que Lillian Zapien tiene una pasión por la repostería, esto le llevó a tomar cursos sobre horneado de pasteles y diseño y posteriormente a ejercer como maestra en el área. Tiempo después tomó la decisión de iniciar su propio negocio de pasteles ya con varios años de experiencia y la necesidad de satisfacer los deseos de los clientes.</p>
 						</div>
 						<div className="btn-box text-center">
 							<Link href="/shop" className="theme-btn btn-style-two regular"><span></span>Productos<span></span></Link>
@@ -43,7 +43,7 @@ const About: React.FC<AboutProps> = () => {
 					<div className="auto-container">
 						<div className="sec-title text-center light">
 							<h2>Nuestra misión</h2>
-							<div className="text">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent molestie eu turpis nec<br /> molestie. Nam auctor magna mauris.</div>
+							<div className="text">Deleite D&apos;Lillian es más que sólo pasteles, es traer a la realidad los sueños de los clientes a través de diseños y sabores personalizados en cada detalle, es satisfacer el paladar y la vista del cliente con sus recetas únicas y su compromiso con la repostería.</div>
 						</div>
 						<div className="row">
 							<div className="feature-block col-lg-3 col-md-6 col-sm-12">
@@ -56,7 +56,7 @@ const About: React.FC<AboutProps> = () => {
 										<div className="icon flaticon-technology"></div>
 									</div>
 									<h3>Tradición</h3>
-									<p>Lorem ipsum dolor amet, consectetur adipiscing elit. Nam consectetur facilisis aliquet.</p>
+									<p>Mantén las tradiciones de tu familia con nuestros mejores postres.</p>
 								</div>
 							</div>
 
@@ -70,7 +70,7 @@ const About: React.FC<AboutProps> = () => {
 										<div className="icon flaticon-food-7"></div>
 									</div>
 									<h3>Calidad</h3>
-									<p>Amet interdum, diam molestie fusce natoque, nascetur laoreet mattis cras hendrerit.</p>
+									<p>Obtén siempre la mejor calidad de ingredientes y sabores en nuestros productos.</p>
 								</div>
 							</div>
 
@@ -84,7 +84,7 @@ const About: React.FC<AboutProps> = () => {
 										<div className="icon flaticon-strawberry"></div>
 									</div>
 									<h3>Creatividad</h3>
-									<p>Ullamcorper phasellus per vestibulum, lacus curabitur, rutrum mi fringilla.</p>
+									<p>Sé el alma de la fiesta con nuestros destacados diseños.</p>
 								</div>
 							</div>
 
@@ -98,7 +98,7 @@ const About: React.FC<AboutProps> = () => {
 										<div className="icon flaticon-food-1"></div>
 									</div>
 									<h3>Pasión</h3>
-									<p>Leo sem, justo hymenaeos torquent tristique aliquam et id, ante eu nascetur dis sit enim.</p>
+									<p>Apasionados por hacer los mejores postres para nuestros cliente.</p>
 								</div>
 							</div>
 						</div>
@@ -139,26 +139,26 @@ const About: React.FC<AboutProps> = () => {
 
 					<div className="auto-container">
 						<div className="sec-title light text-center">
-							<h2>Nuestra repostría</h2>
+							<h2>Nuestra repostería</h2>
 						</div>
 
 						<div className="testimonial-carousel owl-carousel owl-theme">
 
 							<div className="testimonial-block">
 								<div className="inner-box">
-									<div className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel sem imperdiet, venenatis eros ac,mattis mauris. Nam ac purus justo. Vivamus non hendrerit velit.</div>
+									<div className="text">Cumpleaños, bodas, fiestas en general… En estas y otras ocasiones no puede faltar un delicioso pastel. Confíe en nosotros y los pasteles más ricos que estamos a punto de hornear para usted.</div>
 								</div>
 							</div>
 
 							<div className="testimonial-block">
 								<div className="inner-box">
-									<div className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel sem imperdiet, venenatis eros ac,mattis mauris. Nam ac purus justo. Vivamus non hendrerit velit.</div>
+									<div className="text">Un cumpleaños no sería divertido sin un pastel. No te pierdas esa ocasión especial como ninguna otra, confíanos ese pastel divino y festeja como te lo mereces.</div>
 								</div>
 							</div>
 
 							<div className="testimonial-block">
 								<div className="inner-box">
-									<div className="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel sem imperdiet, venenatis eros ac,mattis mauris. Nam ac purus justo. Vivamus non hendrerit velit.</div>
+									<div className="text">Sorprende a tus seres queridos en ese día tan especial, con los divinos pasteles que nuestra pastelería de calidad te puede ofrecer.</div>
 								</div>
 							</div>
 						</div>
@@ -174,15 +174,15 @@ const About: React.FC<AboutProps> = () => {
 										<h2>Nuestros estándares</h2>
 									</div>
 									<div className="divider"><img src="images/icons/icon-devider.png" alt="" /></div>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit suspendisse</p>
+									<p>Calidad sobre todo lo demás</p>
 									<span className="icon fa fa-heart"></span>
-									<p>Nullam porttitor, odio id facilisis dapibus, mauris dolor rhoncus elit</p>
+									<p>Responsabilidad y compromiso con el cliente</p>
 									<span className="icon fa fa-heart"></span>
-									<p>In suscipit hendrerit leo sagittis aliquam. Integer tristique tempus urna</p>
+									<p>Excelencia y pasión por lo que hacemos</p>
 									<span className="icon fa fa-heart"></span>
-									<p>Proin id enim euismod ultricies magna sed ultrices mauris</p>
+									<p>Eficiencia y puntualidad con la entrega de nuestros productos</p>
 									<span className="icon fa fa-heart"></span>
-									<p>Proin interdum enim ac placerat egestas mauris massa scelerisque</p>
+									<p>Dedicación de nuestros servicios 100% al cliente</p>
 								</div>
 							</div>
 						</div>

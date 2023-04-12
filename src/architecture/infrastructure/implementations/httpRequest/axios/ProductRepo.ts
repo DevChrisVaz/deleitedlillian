@@ -22,7 +22,9 @@ class ProductRepo implements IProductRepo {
             params: {
                 category: filter.category,
                 searchBy: encodeURIComponent(filter.searchBy ?? ""),
-                page: filter.page
+                page: filter.page,
+                minPrice: filter.minPrice,
+                maxPrice: filter.maxPrice
             }
         });
         return response;

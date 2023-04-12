@@ -6,8 +6,10 @@ import ProductFilters from '@/architecture/domain/entities/ProductFilters';
 import CategoryRepo from '@/architecture/infrastructure/implementations/httpRequest/axios/CategoryRepo';
 import ProductRepo from '@/architecture/infrastructure/implementations/httpRequest/axios/ProductRepo';
 import { Layout } from '@/components/Layout';
+import { PriceRangeSlider } from '@/components/PriceRangeSlider';
 import { ProductPreview } from '@/components/ProductPreview';
 import { CartWidget } from '@/components/widgets/CartWidget';
+import { Formik } from 'formik';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,11 +23,16 @@ const Shop: React.FC<ShopProps> = () => {
 	const [totalProducts, setTotalProducts] = useState(0);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageButtons, setPageButtons] = useState<any>([]);
-	const [currentFilter, setCurrentFilter] = useState<ProductFilters>({});
-	const [initialValues, setInitialValues] = useState<ProductFilters>({
+	const [currentFilter, setCurrentFilter] = useState<ProductFilters>({
+		limit: 12,
+		page: 1,
 		category: "",
-		searchBy: ""
+		searchBy: "",
+		minPrice: 0,
+		maxPrice: 0
 	});
+	const [minValue, setMinValue] = useState<number>(0);
+	const [maxValue, setMaxValue] = useState<number>(0);
 
 	const router = useRouter();
 	const { page } = router.query;
@@ -50,15 +57,45 @@ const Shop: React.FC<ShopProps> = () => {
 		}
 	}
 
+	const getCategoryFilteredProducts = (category: string) => {
+		const filter = {
+			...currentFilter,
+			category,
+			page: 1
+		}
+		setCurrentFilter(filter);
+		getFilteredProducts(filter);
+		router.push({
+			pathname: router.pathname,
+			query: {
+				page: 1
+			}
+		});
+	}
+
 	const getAllCategories = async () => {
 		try {
 			const { data, status } = await getAllCategoriesUseCase.run();
 			if (status === 200 && data) {
-				setCategories(data);
+				setCategories(data.filter(c => c.type === "CATEGORY"));
 			}
 		} catch (error) {
 			console.log(error);
 		}
+	}
+
+	const handlePriceRangeChange = () => {
+		const filter = {
+			...currentFilter,
+			page: 1
+		}
+		getFilteredProducts(filter);
+		router.push({
+			pathname: router.pathname,
+			query: {
+				page: 1
+			}
+		});
 	}
 
 	useEffect(() => {
@@ -69,7 +106,6 @@ const Shop: React.FC<ShopProps> = () => {
 	useEffect(() => {
 		if (totalProducts > 0) {
 			setPageButtons(Array.from({ length: Math.ceil(totalProducts / 12) }, (_, i) => i + 1));
-			// setPageButtons()
 		}
 	}, [totalProducts]);
 
@@ -89,6 +125,14 @@ const Shop: React.FC<ShopProps> = () => {
 		getFilteredProducts(filter);
 	}, [currentPage]);
 
+	useEffect(() => {
+		setCurrentFilter({
+			...currentFilter,
+			minPrice: minValue,
+			maxPrice: maxValue
+		})
+	}, [minValue, maxValue]);
+	
 	return (
 		<>
 			<Head>
@@ -133,7 +177,7 @@ const Shop: React.FC<ShopProps> = () => {
 										}
 									</div>
 									<div className="row position-relative">
-									{
+										{
 											currentPage > 1 &&
 											<div
 												className={"pagination"}
@@ -225,12 +269,30 @@ const Shop: React.FC<ShopProps> = () => {
 									<div className="sticky-sidebar">
 
 										<div className="sidebar-widget search-widget">
-											<form>
-												<div className="form-group">
-													<input type="search" name="search-field" value="" placeholder="Search products…" required />
-													<button type="submit"><span className="icon fa fa-search"></span></button>
-												</div>
-											</form>
+											<Formik
+												initialValues={currentFilter}
+												onSubmit={getFilteredProducts}
+												enableReinitialize={true}
+											>
+												{({
+													values,
+													handleChange,
+													handleSubmit
+												}) => (
+													<form onSubmit={handleSubmit}>
+														<div className="form-group">
+															<input 
+																type="search" 
+																name="searchBy" 
+																value={values.searchBy}
+																onChange={handleChange}
+																placeholder="Buscar productos" 
+															/>
+															<button type="submit"><span className="icon fa fa-search"></span></button>
+														</div>
+													</form>
+												)}
+											</Formik>
 										</div>
 
 										<CartWidget />
@@ -240,33 +302,33 @@ const Shop: React.FC<ShopProps> = () => {
 												<h3 className="widget-title">Filtro de precios</h3>
 
 												<div className="range-slider-one clearfix">
-													<div className="price-range-slider"></div>
+													<PriceRangeSlider min={0} max={2000} priceGap={0} setMinValue={setMinValue} setMaxValue={setMaxValue} />
 													<div className="clearfix">
-														<div className="pull-left input-box">
+														<div className="pull-left input-box" style={{ visibility: "hidden" }}>
 															<div className="title">Precio:</div>
 															<div className="input"><input type="text" className="property-amount" name="field-name" readOnly /></div>
 														</div>
 														<div className="pull-right btn-box">
-															<a href="#" className="theme-btn"><span className="btn-title">Filtro</span></a>
+															<a className="theme-btn" onClick={handlePriceRangeChange}><span className="btn-title">Filtro</span></a>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-
-										<div className="sidebar-widget tags-widget">
-											<h3 className="widget-title">Tags</h3>
-											<ul className="tag-list clearfix">
-												<li><a href="#">Bars</a></li>
-												<li><a href="#">Caramels</a></li>
-												<li><a href="#">Chocolate</a></li>
-												<li><a href="#">Fruit</a></li>
-												<li><a href="#">Nuts</a></li>
-												<li><a href="#">Toffees</a></li>
-												<li><a href="#">Top Rated</a></li>
-												<li><a href="#">Truffles</a></li>
-											</ul>
-										</div>
+										{
+											categories.length > 0 &&
+											<div className="sidebar-widget tags-widget">
+												<h3 className="widget-title">Categorías</h3>
+												<ul className="tag-list clearfix">
+													<li><a onClick={() => getCategoryFilteredProducts("")}>Todos</a></li>
+													{
+														categories.map((category, index) => (
+															<li key={index}><a onClick={() => getCategoryFilteredProducts(category.uuid ?? "")}>{category.name}</a></li>
+														))
+													}
+												</ul>
+											</div>
+										}
 									</div>
 								</aside>
 							</div>
