@@ -75,6 +75,8 @@ const Checkout: React.FC<CheckoutProps> = () => {
 			...initialValues,
 			products
 		})
+
+		// eslint-disable-next-line
 	}, [cartState]);
 
 	return (

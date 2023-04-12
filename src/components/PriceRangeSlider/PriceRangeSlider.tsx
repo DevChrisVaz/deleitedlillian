@@ -28,6 +28,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = (props) => {
 			props.setMinValue(minInput);
 			props.setMaxValue(maxInput);
 		}
+		//eslint-disable-next-line
 	}, [minInput, maxInput]);	
 
 	return (

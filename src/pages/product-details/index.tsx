@@ -85,10 +85,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
 	useEffect(() => {
 		getProduct();
+		//eslint-disable-next-line
 	}, [id]);
 
 	useEffect(() => {
 		getRelatedProducts(id ? Array.isArray(id) ? id[0] : id : "");
+		//eslint-disable-next-line
 	}, [product]);
 
 	return (
@@ -192,7 +194,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
 															<div className="comment-box">
 																<div className="comment">
-																	<div className="author-thumb"><img src="https://via.placeholder.com/60x60" alt="" /></div>
+																	<div className="author-thumb"><Image src="https://via.placeholder.com/60x60" alt="" width={60} height={60} /></div>
 																	<div className="comment-inner">
 																		<div className="comment-info clearfix">
 																			<strong className="name">Stuart</strong>
@@ -213,7 +215,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
 															<div className="comment-box">
 																<div className="comment">
-																	<div className="author-thumb"><img src="https://via.placeholder.com/60x60" alt="" /></div>
+																	<div className="author-thumb"><Image src="https://via.placeholder.com/60x60" alt="" width={60} height={60} /></div>
 																	<div className="comment-inner">
 																		<div className="comment-info clearfix">
 																			<strong className="name">Maria</strong>

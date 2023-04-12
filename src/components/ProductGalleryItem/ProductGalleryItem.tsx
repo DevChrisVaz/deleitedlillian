@@ -1,5 +1,6 @@
 import Product from '@/architecture/domain/entities/Product';
 import useImage from '@/hooks/useImage';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 export interface ProductGalleryItemProps { 
@@ -13,7 +14,7 @@ const ProductGalleryItem: React.FC<ProductGalleryItemProps> = ({ product }) => {
 	return (
 		<div className="portfolio-block col-lg-3 col-md-6 col-sm-12">
 			<div className="inner-box">
-				<div className="image-box"><figure className="image"><img src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + product.images[0])} alt="" /></figure></div>
+				<div className="image-box"><figure className="image"><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + product.images[0])} alt="" width={275} height={275} /></figure></div>
 				<div className="portfolio-hover">
 					<div className="hover-effect">
 						<svg x="0px" y="0px" viewBox="79 -202.7 1000 1000">

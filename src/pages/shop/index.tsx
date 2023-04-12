@@ -101,6 +101,7 @@ const Shop: React.FC<ShopProps> = () => {
 	useEffect(() => {
 		getFilteredProducts(currentFilter);
 		getAllCategories();
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -123,6 +124,7 @@ const Shop: React.FC<ShopProps> = () => {
 			page: currentPage
 		}
 		getFilteredProducts(filter);
+		// eslint-disable-next-line
 	}, [currentPage]);
 
 	useEffect(() => {
@@ -131,6 +133,7 @@ const Shop: React.FC<ShopProps> = () => {
 			minPrice: minValue,
 			maxPrice: maxValue
 		})
+		// eslint-disable-next-line
 	}, [minValue, maxValue]);
 	
 	return (

@@ -1,5 +1,6 @@
 import { Layout } from '@/components/Layout';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 export interface AboutProps { }
@@ -23,7 +24,7 @@ const About: React.FC<AboutProps> = () => {
 				<section className="about-section-two alternate" style={{ backgroundImage: "url(assets/images/backgrounds/36.jpg)" }}>
 					<div className="auto-container">
 						<div className="sec-title text-center">
-							<div className="divider"><img src="images/icons/divider_1.png" alt="" /></div>
+							<div className="divider"><Image src="/assets/images/icons/divider_1.png" alt="" width={181.42} height={41} /></div>
 							<h2>Nuestra historia</h2>
 						</div>
 						<div className="content-box">
@@ -111,11 +112,11 @@ const About: React.FC<AboutProps> = () => {
 								<div className="inner-column">
 									<div className="content">
 										<div className="sec-title text-center">
-											<div className="divider"><img src="assets/images/icons/divider_1.png" alt="" /></div>
+											<div className="divider"><Image src="/assets/images/icons/divider_1.png" alt="" width={181.42} height={41} /></div>
 											<h2>Lillian Zapien</h2>
 										</div>
 										<h4>Masterchef</h4>
-										<div className="divider"><img src="assets/images/icons/icon-devider.png" alt="" /></div>
+										<div className="divider"><Image src="/assets/images/icons/icon-devider.png" alt="" width={86.2} height={41} /></div>
 										<p>Me llamo Lilian Zapien, me considero una mujer emprendedora, creativa y dispuesta a dar todo de mi cuanto algo me apasiona. Después de graduarme de la escuela, me comencé a enamorar de la cocina y pronto me di cuenta de que todo lo que quería hacer era crear pasteles.</p>
 										<div className="btn-box">
 											<Link href="/shop" className="theme-btn btn-style-two regular alt"><span></span>Productos<span></span></Link>
@@ -126,7 +127,7 @@ const About: React.FC<AboutProps> = () => {
 
 							<div className="image-column col-lg-6 col-md-12 col-sm-12">
 								<div className="inner-column">
-									<figure className="image"><img src="assets/images/team/foto-conoceme.png" alt="" /></figure>
+									<figure className="image"><Image src="/assets/images/team/foto-conoceme.png" alt="" width={570} height={760.3} /></figure>
 								</div>
 							</div>
 						</div>
@@ -170,10 +171,10 @@ const About: React.FC<AboutProps> = () => {
 							<div className="content-column col-lg-6 col-md-12 col-sm-12">
 								<div className="content">
 									<div className="sec-title text-center">
-										<div className="divider"><img src="images/icons/divider_1.png" alt="" /></div>
+										<div className="divider"><Image src="/assets/images/icons/divider_1.png" alt="" width={181.42} height={41} /></div>
 										<h2>Nuestros estándares</h2>
 									</div>
-									<div className="divider"><img src="images/icons/icon-devider.png" alt="" /></div>
+									<div className="divider"><Image src="/assets/images/icons/icon-devider.png" alt="" width={86.2} height={41} /></div>
 									<p>Calidad sobre todo lo demás</p>
 									<span className="icon fa fa-heart"></span>
 									<p>Responsabilidad y compromiso con el cliente</p>

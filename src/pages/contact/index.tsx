@@ -1,5 +1,6 @@
 import { Layout } from '@/components/Layout';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 export interface ContactProps { }
@@ -23,7 +24,7 @@ const Contact: React.FC<ContactProps> = () => {
 				<section className="contact-section">
 					<div className="auto-container">
 						<div className="sec-title text-center">
-							<div className="divider"><img src="images/icons/divider_1.png" alt="" /></div>
+							<div className="divider"><Image src="/assets/images/icons/divider_1.png" alt="" width={181.42} height={41} /></div>
 							<h2>Contacto</h2>
 							<div className="text">Si tienes alguna duda, queja o sugerencia no dudes en ponerte en contacto con nosotros, siempre leemos todos sus comentarios. Nos pondremos en contacto con usted lo más pronto posible. Agradecemos su preferencia. <br /> <span style={{ fontSize: "20px", fontWeight: "bold" }}>¡Muchas gracias!</span></div>
 						</div>
@@ -32,7 +33,7 @@ const Contact: React.FC<ContactProps> = () => {
 							<div className="column col-xl-3 col-lg-6 col-md-6 col-sm-12">
 								<div className="inner-column">
 									<div className="title">
-										<div className="icon"><img src="assets/images/icons/icon-devider-gray.png" alt="" /></div>
+										<div className="icon"><Image src="/assets/images/icons/icon-devider-gray.png" alt="" width={74} height={36.48} /></div>
 										<h4>Horario</h4>
 									</div>
 
@@ -47,7 +48,7 @@ const Contact: React.FC<ContactProps> = () => {
 							<div className="column col-xl-3 col-lg-6 col-md-6 col-sm-12 order-3">
 								<div className="inner-column">
 									<div className="title">
-										<div className="icon"><img src="assets/images/icons/icon-devider-gray.png" alt="" /></div>
+										<div className="icon"><Image src="/assets/images/icons/icon-devider-gray.png" alt="" width={74} height={36.48} /></div>
 										<h4>Contactos</h4>
 									</div>
 
@@ -62,7 +63,7 @@ const Contact: React.FC<ContactProps> = () => {
 							<div className="column col-xl-6 col-lg-12 col-md-12 col-sm-12">
 								<div className="inner-column">
 									<div className="title">
-										<div className="icon"><img src="assets/images/icons/icon-devider-gray.png" alt="" /></div>
+										<div className="icon"><Image src="/assets/images/icons/icon-devider-gray.png" alt="" width={74} height={36.48} /></div>
 										<h4>Envíanos un mensaje</h4>
 									</div>
 									<div className="contact-form">
