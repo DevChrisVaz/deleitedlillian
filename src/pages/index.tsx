@@ -10,6 +10,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Slider from "react-slick"
 
 export default function Home() {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -19,6 +20,16 @@ export default function Home() {
   const getPublicCommentsUseCase = new GetPublicCommentsUseCase(commentRepo);
   const productRepo = new ProductRepo();
   const getMostVisitedProductsUseCase = new GetMostVisitedProductsUseCase(productRepo);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
 
   const getPublicComments = async () => {
     try {
@@ -357,7 +368,7 @@ export default function Home() {
                     data-paddingright="[0,0,0,0]"
                     data-paddingbottom="[0,0,0,0]"
                     data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "16px", lineHeight: "24px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Nada nos trae tanta felicidad como la alegría <br/> de nuestros clientes después de degustar nuestros <br /> deliciosos pasteles.</div>
+                    style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "16px", lineHeight: "24px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Nada nos trae tanta felicidad como la alegría <br /> de nuestros clientes después de degustar nuestros <br /> deliciosos pasteles.</div>
 
                   <div className="tp-caption   tp-resizeme"
                     id="slide-4-layer-31"
@@ -711,9 +722,7 @@ export default function Home() {
                 <h2>Opiniones de nuestros clientes</h2>
               </div>
 
-
-              <div className="testimonial-carousel owl-carousel owl-theme">
-
+              <Slider {...settings} arrows={false} dots={false}>
                 {
                   comments.map((comment, index) => (
                     <div className="testimonial-block" key={index}>
@@ -732,7 +741,7 @@ export default function Home() {
                     </div>
                   ))
                 }
-              </div>
+              </Slider>
             </div>
           </section>
         }

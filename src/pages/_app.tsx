@@ -2,6 +2,8 @@ import { Facebook } from '@/components/Facebook';
 import { wrapper } from '@/features/store';
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function App({ Component, pageProps }: AppProps) {
 
