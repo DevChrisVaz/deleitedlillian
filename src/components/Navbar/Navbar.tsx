@@ -3,7 +3,7 @@ import useImage from '@/hooks/useImage';
 import Image from 'next/image';
 import Link from 'next/link';
 import numeral from 'numeral';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 export interface NavbarProps { }
 
@@ -14,11 +14,63 @@ const Navbar: React.FC<NavbarProps> = () => {
 	const cartState = useSelector(selectCartState);
 	const dispatch = useDispatch();
 	const image = useImage();
+	const mainHeaderRef = useRef<HTMLDivElement>(null);
+	const stickyHeaderRef = useRef<HTMLDivElement>(null);
+	const mobileMenuRef = useRef<HTMLDivElement>(null);
+	// const [iScrollPosition, setIScrollPosition] = useState(0);
+	let iScrollPosition = 0;
 	// const cartTotal = useSelector(selectCartTotal);
 
 	const handleRemoveFromCart = (productId: string) => {
 		dispatch(removeItem(productId));
 	}
+
+	const fixHeader = () => {
+		if (mainHeaderRef.current) {
+			let positionY = window.scrollY || 0;
+			if (positionY > 700) {
+				mainHeaderRef.current.classList.add("fixed-header");
+			} else {
+				mainHeaderRef.current.classList.remove("fixed-header");
+			}
+		}
+	}
+
+	const hideAndShowOnScroll = () => {
+		if (stickyHeaderRef.current) {
+			let iCurrentScrollPosition = window.scrollY || 0;
+			if (iCurrentScrollPosition > iScrollPosition) {
+				stickyHeaderRef.current.style.cssText = "position: fixed; width: 100%; top: -120px;"
+			} else {
+				stickyHeaderRef.current.style.cssText = "top: 0;"
+			}
+			iScrollPosition = iCurrentScrollPosition;
+		}
+	}
+
+	const handleMobileMenu = () => {
+		document.body.classList.toggle("mobile-menu-visible");
+	}
+
+	useEffect(() => {
+		fixHeader();
+		window.addEventListener("scroll", () => {
+			fixHeader(); 
+			hideAndShowOnScroll();
+		});
+
+		return () => window.removeEventListener("scroll", () => {
+			fixHeader(); 
+			hideAndShowOnScroll();
+		});
+	}, []);
+
+	// useEffect(() => {
+	// 	if (mobileMenuRef.current) {
+
+	// 	}
+	// }, [mobileMenuRef.current]);
+	
 
 	useEffect(() => {
 		let total: number = 0;
@@ -32,13 +84,13 @@ const Navbar: React.FC<NavbarProps> = () => {
 	}, [cartState]);
 
 	return (
-		<header className="main-header">
+		<header className="main-header" ref={mainHeaderRef}>
 
 			<div className="menu_wave"></div>
 
 			<div className="main-box">
 				<div className="menu-box">
-					<div className="logo"><a href="index.html"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro.png" width={190} height={100} alt="" title="" /></a></div>
+					<div className="logo"><Link href="/"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro.png" width={190} height={100} alt="" title="" /></Link></div>
 
 					<div className="nav-outer clearfix">
 
@@ -100,7 +152,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 				</div>
 			</div>
 
-			<div className="sticky-header">
+			<div className="sticky-header" ref={stickyHeaderRef}>
 				<div className="auto-container clearfix">
 
 					<div className="logo">
@@ -112,7 +164,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 						<div className="mobile-nav-toggler"><span className="icon flaticon-menu"></span></div>
 
 						<nav className="main-menu">
-							<div className="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+							<div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
 								<ul className="navigation menu-left clearfix">
 									<li><Link href="/">Inicio</Link></li>
 									<li><Link href="/about">Conócenos</Link></li>
@@ -136,30 +188,31 @@ const Navbar: React.FC<NavbarProps> = () => {
 					<div className="cart-btn">
 						<Link href="shopping-cart"><i className="icon flaticon-commerce"></i> {totalItems > 0 && <span className="count">{totalItems}</span>} </Link>
 					</div>
-					<div className="mobile-nav-toggler"><span className="icon fa fa-bars"></span></div>
+					<div className="mobile-nav-toggler" onClick={handleMobileMenu}><span className="icon fa fa-bars"></span></div>
 				</div>
 			</div>
 
 
-			<div className="mobile-menu">
+			<div className="mobile-menu" ref={mobileMenuRef}>
 				<nav className="menu-box">
 					<div className="nav-logo"><Link href="/"><Image src="/assets/images/logos/logo-deleite-cafe_oscuro_small.png" width={150} height={80} alt="" title="" /></Link></div>
-					<div className="collapse navbar-collapse clearfix" id="navbarSupportedContent">
+					<div className="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
 						<ul className="navigation menu-left clearfix">
-							<li><Link href="/">Inicio</Link></li>
-							<li><Link href="/about">Conócenos</Link></li>
+							<li><Link href="/" onClick={handleMobileMenu}>Inicio</Link></li>
+							<li><Link href="/about" onClick={handleMobileMenu}>Conócenos</Link></li>
 						</ul>
 
 						<ul className="navigation menu-right clearfix">
-							<li><Link href="/shop">Tienda</Link></li>
-							<li><Link href="/contact">Contacto</Link></li>
+							<li><Link href="/shop" onClick={handleMobileMenu}>Tienda</Link></li>
+							<li><Link href="/contact" onClick={handleMobileMenu}>Contacto</Link></li>
 						</ul>
 					</div>
 				</nav>
+				<div className="close-btn" onClick={handleMobileMenu}><span className="icon fa fa-times"></span></div>
 			</div>
 
 
-			<div className="search-popup">
+			{/* <div className="search-popup">
 				<span className="search-back-drop"></span>
 
 				<div className="search-inner">
@@ -171,7 +224,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 						</div>
 					</form>
 				</div>
-			</div>
+			</div> */}
 		</header>
 	);
 };

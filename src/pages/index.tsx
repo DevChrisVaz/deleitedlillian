@@ -22,14 +22,52 @@ export default function Home() {
   const getMostVisitedProductsUseCase = new GetMostVisitedProductsUseCase(productRepo);
 
   const settings = {
+    arrows: false,
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
+  const ourSpecialtiesSettings = {
     dots: true,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 5000,
-    speed: 5000,
-    slidesToShow: 1,
-    slidesToScroll: 1
-  };
+    speed: 1500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  }
 
   const getPublicComments = async () => {
     try {
@@ -65,378 +103,99 @@ export default function Home() {
       </Head>
       <Layout>
         <section className="main-slider">
-          <div className="slider_wave"></div>
-          <div className="rev_slider_wrapper fullwidthbanner-container" id="rev_slider_one_wrapper" data-source="gallery">
-            <div className="rev_slider fullwidthabanner" id="rev_slider_one" data-version="5.4.1">
-              <ul>
-                <li data-index="rs-4" data-transition="zoomout" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="850" data-thumb="#" data-delay="5999" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 
-                  <Image src="/assets/images/main-slider/slider1.jpg" alt="" width={1920} height={1272} title="Home Cakes" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" className="rev-slidebg" data-no-retina />
+          <Slider {...settings}>
 
-                  <div className="tp-caption tp-shape tp-shapewrapper  tp-resizeme"
-                    id="slide-4-layer-44"
-                    data-x="center" data-hoffset="1"
-                    data-y="center" data-voffset="-3"
-                    data-width="['full','full','full','full']"
-                    data-height="['full','full','full','full']"
-                    data-type="shape"
-                    data-basealign="slide"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":10,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 5, backgroundColor: "rgba(80,81,92,0.15)" }}></div>
+            <div className="slider-container">
 
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-40"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 6 }}><Image src="/assets/images/main-slider/slider_bg_1.png" alt="" width={654} height={654} data-ww="654px" data-hh="654px" data-no-retina /> </div>
+              <Image
+                src="/assets/images/main-slider/slider1.jpg"
+                alt=""
+                fill
+                title="Home Cakes"
+              />
 
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-33"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="100"
-                    data-width="['auto']"
-                    data-height="['auto']"
-                    data-visibility="['on','on','off','off']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "16px", lineHeight: "24px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Cuando se trata de pasteles, hacemos <br /> realidad los sueños con nuestras ricas recetas, <br /> creatividad y estilo.</div>
+              <div className="background-white" style={{ zIndex: 6 }}>
+                <Image 
+                  src="/assets/images/main-slider/slider_bg_1.png" 
+                  alt="" 
+                  width={460} 
+                  height={460} 
+                />
+              </div>
 
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-31"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-18"
-                    data-width="['399']"
-                    data-height="['auto']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal", fontSize: "72px", lineHeight: "72px", fontWeight: 400, color: "#4b4342", fontFamily: "Leckerli One" }}>Bienvenidos <br />a Deleite </div>
+              <div className="text-second text-center"
+                style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "12px", lineHeight: "16px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Cuando se trata de pasteles, hacemos <br /> realidad los sueños con nuestras ricas recetas, <br /> creatividad y estilo.</div>
 
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-41"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-150"
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" width={125} height={60} data-ww="125px" data-hh="60px" data-no-retina /> </div>
+              <div className="text-first text-center"
+                style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal" }}>Bienvenidos <br />a Deleite </div>
+
+              <div className="icon-center"
+                style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" width={80} height={60} /> </div>
 
 
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-4-layer-42"
-                    data-x="398"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /> </div>
+              <div className="icon-left"
+                style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" width={196} height={107} /> </div>
 
 
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-4-layer-43"
-                    data-x="1325"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /></div>
-                </li>
-
-                <li data-index="rs-5" data-transition="zoomout" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="850" data-thumb="" data-delay="5999" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-
-                  <Image src="/assets/images/main-slider/slider2.jpg" alt="" width={1920} height={1272} title="Home Cakes" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" className="rev-slidebg" data-no-retina />
-
-
-
-                  <div className="tp-caption tp-shape tp-shapewrapper  tp-resizeme"
-                    id="slide-5-layer-44"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset=""
-                    data-width="['full','full','full','full']"
-                    data-height="['full','full','full','full']"
-                    data-type="shape"
-                    data-basealign="slide"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":10,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 5, backgroundColor: "rgba(80,81,92,0.15)" }}> </div>
-
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-5-layer-40"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-1"
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 6 }}><Image src="/assets/images/main-slider/slider_bg_1.png" alt="" data-ww="654px" data-hh="654px" width={654} height={654} data-no-retina /> </div>
-
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-33"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="100"
-                    data-width="['auto']"
-                    data-height="['auto']"
-                    data-visibility="['on','on','off','off']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "16px", lineHeight: "24px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Sea cual sea el pastel con el que soñaste, <br /> te lo haremos si nos dejas ayudar.</div>
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-31"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-18"
-                    data-width="['399']"
-                    data-height="['auto']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal", fontSize: "72px", lineHeight: "72px", fontWeight: 400, color: "#4b4342", fontFamily: "Leckerli One" }}>Bienvenidos <br />a Deleite </div>
-
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-5-layer-41"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-150"
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" data-ww="125px" data-hh="60px" width={125} height={60} data-no-retina /> </div>
-
-
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-5-layer-42"
-                    data-x="398"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /> </div>
-
-
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-5-layer-43"
-                    data-x="1325"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /> </div>
-                </li>
-
-                <li data-index="rs-6" data-transition="zoomout" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="850" data-thumb="" data-delay="5999" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
-
-                  <Image src="/assets/images/main-slider/slider3.jpg" alt="" width={1920} height={1272} title="Home Cakes" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" className="rev-slidebg" data-no-retina />
-
-                  <div className="tp-caption tp-shape tp-shapewrapper  tp-resizeme"
-                    id="slide-6-layer-44"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset=""
-                    data-width="['full','full','full','full']"
-                    data-height="['full','full','full','full']"
-                    data-type="shape"
-                    data-basealign="slide"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":10,"speed":300,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 5, backgroundColor: "rgba(80,81,92,0.15)" }}> </div>
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-6-layer-40"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-1"
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 6 }}><Image src="/assets/images/main-slider/slider_bg_1.png" alt="" data-ww="654px" data-hh="654px" width={654} height={654} data-no-retina /> </div>
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-33"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="100"
-                    data-width="['auto']"
-                    data-height="['auto']"
-                    data-visibility="['on','on','off','off']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "16px", lineHeight: "24px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Nada nos trae tanta felicidad como la alegría <br /> de nuestros clientes después de degustar nuestros <br /> deliciosos pasteles.</div>
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-4-layer-31"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-18"
-                    data-width="['399']"
-                    data-height="['auto']"
-                    data-type="text"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power2.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"nothing"}]'
-                    data-textAlign="['center','center','center','center']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal", fontSize: "72px", lineHeight: "72px", fontWeight: 400, color: "#4b4342", fontFamily: "Leckerli One" }}>Bienvenidos <br />a Deleite </div>
-
-                  <div className="tp-caption   tp-resizeme"
-                    id="slide-6-layer-41"
-                    data-x="center" data-hoffset=""
-                    data-y="center" data-voffset="-150"
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" data-ww="125px" data-hh="60px" width={125} height={60} data-no-retina /> </div>
-
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-6-layer-42"
-                    data-x="398"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /> </div>
-
-                  <div className="tp-caption tp-resizeme hide-sm"
-                    id="slide-6-layer-43"
-                    data-x="1325"
-                    data-y="center" data-voffset=""
-                    data-width="['none','none','none','none']"
-                    data-height="['none','none','none','none']"
-                    data-type="image"
-                    data-responsive_offset="on"
-                    data-frames='[{"delay":500,"speed":1000,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]'
-                    data-textAlign="['inherit','inherit','inherit','inherit']"
-                    data-paddingtop="[0,0,0,0]"
-                    data-paddingright="[0,0,0,0]"
-                    data-paddingbottom="[0,0,0,0]"
-                    data-paddingleft="[0,0,0,0]"
-                    style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" data-ww="196px" data-hh="107px" width={196} height={107} data-no-retina /> </div>
-                </li>
-              </ul>
+              <div className="icon-right"
+                style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" width={196} height={107} /></div>
             </div>
-          </div>
+
+            <div className="slider-container">
+
+              <Image src="/assets/images/main-slider/slider2.jpg" alt="" fill title="Home Cakes" />
+
+              <div className="background-white"
+                style={{ zIndex: 6 }}><Image src="/assets/images/main-slider/slider_bg_1.png" alt="" width={460} height={460} /> </div>
+
+              <div className="text-second text-center"
+                style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "12px", lineHeight: "16px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Sea cual sea el pastel con el que soñaste, <br /> te lo haremos si nos dejas ayudar.</div>
+
+              <div className="text-first text-center"
+                style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal" }}>Bienvenidos <br />a Deleite </div>
+
+              <div className="icon-center"
+                style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" width={80} height={60} /> </div>
+
+
+              <div className="icon-left"
+                style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" width={196} height={107} /> </div>
+
+
+              <div className="icon-right"
+                style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" width={196} height={107} /></div>
+
+            </div>
+
+            <div className="slider-container">
+
+              <Image src="/assets/images/main-slider/slider3.jpg" alt="" fill title="Home Cakes" />
+
+              <div className="background-white"
+                style={{ zIndex: 6 }}><Image src="/assets/images/main-slider/slider_bg_1.png" alt="" width={460} height={460} /> </div>
+
+              <div className="text-second text-center"
+                style={{ zIndex: 7, whiteSpace: "nowrap", fontSize: "12px", lineHeight: "16px", fontWeight: 400, color: "#4b4342", fontFamily: "ABeeZee" }}>Nada nos trae tanta felicidad como la alegría <br /> de nuestros clientes después de degustar nuestros <br /> deliciosos pasteles.</div>
+
+              <div className="text-first text-center"
+                style={{ zIndex: 8, minWidth: "399px", maxWidth: "399px", whiteSpace: "normal" }}>Bienvenidos <br />a Deleite </div>
+
+              <div className="icon-center"
+                style={{ zIndex: 9 }}><Image src="/assets/images/main-slider/slider_bg_4.png" alt="" width={80} height={60} /> </div>
+
+
+              <div className="icon-left"
+                style={{ zIndex: 10 }}><Image src="/assets/images/main-slider/slider_bg_3.png" alt="" width={196} height={107} /> </div>
+
+
+              <div className="icon-right"
+                style={{ zIndex: 11 }}><Image src="/assets/images/main-slider/slider_bg_2.png" alt="" width={196} height={107} /></div>
+
+            </div>
+
+          </Slider>
+
         </section>
         <section className="services-section" style={{ backgroundImage: "url(assets/images/backgrounds/cupcakes-1850628_1920.jpg)" }}>
           <div className="auto-container">
@@ -446,7 +205,7 @@ export default function Home() {
               <h2>Nuestras especialidades</h2>
             </div>
 
-            <div className="services-carousel owl-carousel owl-theme">
+            <Slider {...ourSpecialtiesSettings}>
 
               <div className="service-block">
                 <div className="inner-box">
@@ -568,7 +327,8 @@ export default function Home() {
                 </div>
               </div>
 
-            </div>
+            </Slider>
+
           </div>
         </section>
         <section className="call-to-action" >
@@ -587,7 +347,7 @@ export default function Home() {
               <h1>De mi horno a tu mesa</h1>
               <p>Conoce nuestros exquisitos y detallados pasteles de temporada, deléitate con sus sabores, sorpréndete con nuestros diseños y obtén la mejor calidad en nuestros productos.</p>
               <div className="btn-box">
-                <a href="#" className="theme-btn btn-style-one large"><span></span>Descubre más<span></span></a>
+                <Link href="custom-cakes" className="theme-btn btn-style-one large"><span></span>Descubre más<span></span></Link>
               </div>
             </div>
           </div>
@@ -684,7 +444,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <section className="recipes-section" style={{ backgroundImage: "url(https://via.placeholder.com/1920x1080)" }}>
+        {/* <section className="recipes-section" style={{ backgroundImage: "url(https://via.placeholder.com/1920x1080)" }}>
           <div className="auto-container">
             <div className="sec-title text-center">
               <div className="divider"><Image src="/assets/images/icons/divider_1.png" alt="" width={177} height={40} /></div>
@@ -709,11 +469,11 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
         {
           comments.length > 0 &&
           <section className="testimonial-section">
-            <div className="shape_wrapper shape_one">
+            <div className="shape_wrapper">
               <div className="shape_inner shape_two"><div className="overlay"></div></div>
             </div>
 
@@ -722,7 +482,7 @@ export default function Home() {
                 <h2>Opiniones de nuestros clientes</h2>
               </div>
 
-              <Slider {...settings} arrows={false} dots={false}>
+              <Slider {...settings}>
                 {
                   comments.map((comment, index) => (
                     <div className="testimonial-block" key={index}>

@@ -3442,6 +3442,7 @@ hr{
     -webkit-mask-repeat: no-repeat;
     margin-bottom: -40px;
     z-index: 8;
+	height: 580px;
 }
 
 .main-slider h2{
@@ -3464,6 +3465,75 @@ hr{
 	color: #4b4342; 
 	font-family:ABeeZee;
 	z-index: 99;
+}
+
+.main-slider .slider-container {
+	position: relative;
+	width: 100%;
+	height: 580px;
+}
+
+.main-slider .slider-container > img {
+	object-fit: cover;
+	filter: brightness(0.9);
+}
+
+.main-slider .slider-container .background-white {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.main-slider .slider-container .text-second {
+	position: absolute;
+	top: 58%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.main-slider .slider-container .text-first {
+	position: absolute;
+	top: 38%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 52px;
+	line-height: 52px;
+	font-weight: 400;
+	color: #4b4342;
+	font-family: "Leckerli One";
+}
+
+.main-slider .slider-container .icon-center {
+	position: absolute;
+	top: 28%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+@media screen and (max-width: 480px) {
+	.main-slider {
+		height: 450px;
+	}
+
+	.main-slider .slider-container {
+		height: 450px;
+	}
+
+	.main-slider .slider-container .background-white {
+		width: 340px;
+		height: 340px;
+	}
+
+	.main-slider .slider-container .text-second {
+		display: none;
+	}
+	
+	.main-slider .slider-container .text-first {
+		font-size: 36px;
+		line-height: 36px;
+		top: 40%;
+	}
 }
 
 .disable-tparrows .tparrows{
@@ -3796,11 +3866,13 @@ hr{
 ***/
 
 .services-section{
+	max-width: 100vw;
 	position: relative;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
 	padding: 100px 0 167px;
+	overflow: hidden;
 }
 
 .services-section:before{

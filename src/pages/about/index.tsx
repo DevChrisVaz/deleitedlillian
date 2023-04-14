@@ -3,9 +3,22 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import Slider from 'react-slick';
 export interface AboutProps { }
 
 const About: React.FC<AboutProps> = () => {
+
+	const settings = {
+		arrows: false,
+		dots: false,
+		infinite: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1
+	  };
+
 	return (
 		<>
 			<Head>
@@ -143,7 +156,7 @@ const About: React.FC<AboutProps> = () => {
 							<h2>Nuestra repostería</h2>
 						</div>
 
-						<div className="testimonial-carousel owl-carousel owl-theme">
+						<Slider {...settings}>
 
 							<div className="testimonial-block">
 								<div className="inner-box">
@@ -162,7 +175,8 @@ const About: React.FC<AboutProps> = () => {
 									<div className="text">Sorprende a tus seres queridos en ese día tan especial, con los divinos pasteles que nuestra pastelería de calidad te puede ofrecer.</div>
 								</div>
 							</div>
-						</div>
+
+						</Slider>
 					</div>
 				</section>
 				<section className="our-standards" style={{ backgroundImage: "url(assets/images/backgrounds/fruit-2388851_1920.jpg)" }}>
