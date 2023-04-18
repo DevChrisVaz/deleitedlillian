@@ -12,7 +12,7 @@ const Contact: React.FC<ContactProps> = () => {
 				<title>Contacto</title>
 			</Head>
 			<Layout>
-				<section className="page-title" style={{ backgroundImage: "url(https://via.placeholder.com/1920x400)" }}>
+				<section className="page-title" style={{ backgroundImage: "url(/assets/images/backgrounds/desserts-1868181_1920.jpg)" }}>
 					<div className="auto-container">
 						<h1>Contacto</h1>
 						<ul className="page-breadcrumb">

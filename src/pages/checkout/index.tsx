@@ -56,7 +56,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 			}
 		} catch (err: any) {
 			if (err instanceof CreateQuoteException && err.cause) setErrors(err.cause);
-			alert("No se pudo solicitar la cotización");
+			// alert("No se pudo solicitar la cotización");
 		}
 	}
 
@@ -105,8 +105,8 @@ const Checkout: React.FC<CheckoutProps> = () => {
 								<div className="col-lg-6 col-md-12 col-sm-12">
 									<div className="message-box with-icon error" style={{ maxHeight: "60px" }}>
 										<div className="icon-box"><span className="icon fa fa-ban"></span></div>
-										<h4>Error Box</h4>
-										<p>Vestibulum sodales pellentesque nibi</p>
+										<h4>Revise los campos</h4>
+										<p>Hay campos obligatorios que no se han llenado</p>
 										<button className="close-btn"><span className="fa fa-times"></span></button>
 									</div>
 								</div>
@@ -143,6 +143,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.firstName}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.firstName ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
@@ -156,6 +157,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.lastName}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.lastName ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
@@ -431,6 +433,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.address}
 															onChange={handleChange}
 															placeholder="Calle número de casa colonia"
+															style={ errors.address ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
@@ -454,6 +457,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.city}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.city ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
@@ -470,15 +474,16 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															type="text"
 															id="zip"
 															name="zip"
-															value={values.city}
+															value={values.zip}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.zip ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
 
 													<div className="form-group">
-														<div className="field-label">Celular</div>
+														<div className="field-label">Celular <sup>*</sup></div>
 														<input
 															type="text"
 															id="phone"
@@ -486,12 +491,13 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.phone}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.phone ? { borderColor: "red" } : {} }
 														/>
 													</div>
 
 
 													<div className="form-group">
-														<div className="field-label">Dirección de correo</div>
+														<div className="field-label">Dirección de correo <sup>*</sup></div>
 														<input
 															type="text"
 															id="email"
@@ -499,6 +505,7 @@ const Checkout: React.FC<CheckoutProps> = () => {
 															value={values.email}
 															onChange={handleChange}
 															placeholder=""
+															style={ errors.firstName ? { borderColor: "red" } : {} }
 														/>
 													</div>
 												</div>
@@ -513,13 +520,13 @@ const Checkout: React.FC<CheckoutProps> = () => {
 
 
 													<div className="form-group ">
-														<div className="field-label">Instrucciones adicionales (optional)</div>
+														<div className="field-label">Instrucciones adicionales (opcional)</div>
 														<textarea
 															id="details"
 															name="details"
 															value={values.details}
 															onChange={handleChange}
-															placeholder="Detalles sobre tu pedido, notas especiales de entrega"
+															placeholder="Detalles sobre tu pedido, notas especiales de entrega..."
 														/>
 													</div>
 												</div>

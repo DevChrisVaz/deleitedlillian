@@ -3,7 +3,7 @@ import { AppState } from "../store";
 import { HYDRATE } from "next-redux-wrapper";
 import Product from "@/architecture/domain/entities/Product";
 
-interface Item {
+export interface Item {
     product: Product,
     qty: number
 }

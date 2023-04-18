@@ -99,7 +99,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 				<title>Detalles de producto</title>
 			</Head>
 			<Layout>
-				<section className="page-title" style={{ backgroundImage: "url(https://via.placeholder.com/1920x400)" }}>
+				<section className="page-title" style={{ backgroundImage: "url(/assets/images/backgrounds/marshmallow-2572978_1920.jpg)" }}>
 					<div className="auto-container">
 						<h1>{product?.name}</h1>
 						<ul className="page-breadcrumb">
@@ -127,16 +127,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 												<div className="info-column col-md-6 col-sm-12">
 													<div className="details-header">
 														<h4>{product?.name}</h4>
-														<div className="rating">
+														{/* <div className="rating">
 															<span className="fa fa-star"></span>
 															<span className="fa fa-star"></span>
 															<span className="fa fa-star"></span>
 															<span className="fa fa-star"></span>
 															<span className="fa fa-star"></span>
 														</div>
-														<a className="reviews" href="#">(2 opiniones de clientes)</a>
+														<a className="reviews" href="#">(2 opiniones de clientes)</a> */}
 														<div className="item-price">{numeral(product?.price ?? 0).format("$0,0.00")}</div>
-														<div className="text">Accumsan lectus, consectetuer et sagittis et commodo, massa et, sed facilisi mi, sit diam. Ultrices facilisi convallis nullam duis. Aliquam lacinia orci convallis erat ac, vitae neque in className.</div>
+														<div className="text">{product?.description}</div>
 													</div>
 
 													<div className="other-options clearfix">
@@ -165,13 +165,13 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 
 
 
-										<div className="product-info-tabs">
+										{/* <div className="product-info-tabs">
 
 											<div className="prod-tabs tabs-box">
 
 
 												<ul className="tab-btns tab-buttons clearfix">
-													<li data-tab="#prod-details" className="tab-btn">Descripción</li>
+													<li data-tab="#prod-details" className="tab-btn active-btn">Descripción</li>
 													<li data-tab="#prod-reviews" className="tab-btn active-btn">Opiniones (2)</li>
 												</ul>
 
@@ -179,16 +179,16 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 												<div className="tabs-content">
 
 
-													<div className="tab" id="prod-details">
-														{/* <h2 className="title">Descripción</h2> */}
+													<div className="tab active-tab" id="prod-details">
+														<h2 className="title">Descripción</h2>
 														<div className="content">
 															<p>{product?.description}</p>
 														</div>
 													</div>
 
 
-													<div className="tab active-tab" id="prod-reviews">
-														{/* <h2 className="title">2 opiniones sobre Nombre de producto</h2> */}
+													<div className="tab" id="prod-reviews">
+														<h2 className="title">2 opiniones sobre Nombre de producto</h2>
 
 														<div className="comments-area">
 
@@ -276,7 +276,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = () => {
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> */}
 
 
 

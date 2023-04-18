@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout';
-import { changeProductQty, decreaseProductQty, increaseProductQty, removeItem, selectCartState } from '@/features/slices/cartSlice';
+import { Item, changeProductQty, decreaseProductQty, increaseProductQty, removeItem, selectCartState } from '@/features/slices/cartSlice';
 import useImage from '@/hooks/useImage';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -14,17 +14,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 	const [cartTotal, setCartTotal] = useState<number>(0);
 
 	const router = useRouter();
-	const dispatch = useDispatch();
 	const cart = useSelector(selectCartState);
-	const image = useImage();
-
-	const handleRemoveFromCart = (productId: string) => {
-		dispatch(removeItem(productId));
-	}
-
-	const handleChangeQty = (productId: string, qty: string) => {
-		dispatch(changeProductQty({ uuid: productId, qty: parseInt(qty) }));
-	}
 
 	useEffect(() => {
 		let totalPrice: number = 0;
@@ -70,14 +60,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 											cart.length > 0 &&
 											cart.map((item, index) => {
 												return (
-													<tr className="cart-item" key={index}>
-														<td className="product-thumbnail"><a href="shop-single.html"><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" /></a></td>
-														<td className="product-name"><a href="shop-single.html">{item.product.name}</a></td>
-														<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
-														<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value={item.qty} onChange={(e) => handleChangeQty(item.product.uuid ?? "", e.target.value)} /> </div></td>
-														<td className="product-subtotal"><span className="amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span></td>
-														<td className="product-remove"> <a className="remove" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")} style={{ cursor: "pointer" }}><span className="fa fa-times"></span></a></td>
-													</tr>
+													<CartItem item={item} key={index} />
 												)
 											})
 										}
@@ -98,7 +81,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 								</div>
 
 								<div className="pull-right">
-									<button type="button" className="theme-btn cart-btn">Seguir cotizando</button>
+									<button type="button" className="theme-btn cart-btn" onClick={() => router.push("/shop")}>Seguir cotizando</button>
 								</div>
 							</div>
 						</div>
@@ -123,5 +106,34 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
 		</>
 	);
 };
+
+interface CartItemProps {
+	item: Item;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
+
+	const image = useImage();
+	const dispatch = useDispatch();
+
+	const handleChangeQty = (productId: string, qty: string) => {
+		dispatch(changeProductQty({ uuid: productId, qty: parseInt(qty) }));
+	}
+
+	const handleRemoveFromCart = (productId: string) => {
+		dispatch(removeItem(productId));
+	}
+
+	return (
+		<tr className="cart-item">
+			<td className="product-thumbnail"><a href="shop-single.html"><Image src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" /></a></td>
+			<td className="product-name"><a href="shop-single.html">{item.product.name}</a></td>
+			<td className="product-price">{numeral(item.product.price).format("$0,0.00")}</td>
+			<td className="product-quantity"><div className="quantity"><label>Cantidad</label><input type="number" className="qty" name="qty" value={item.qty} onChange={(e) => handleChangeQty(item.product.uuid ?? "", e.target.value)} /> </div></td>
+			<td className="product-subtotal"><span className="amount">{numeral((item.product.price ?? 0) * item.qty).format("$0,0.00")}</span></td>
+			<td className="product-remove"> <a className="remove" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")} style={{ cursor: "pointer" }}><span className="fa fa-times"></span></a></td>
+		</tr>
+	);
+}
 
 export default ShoppingCart;

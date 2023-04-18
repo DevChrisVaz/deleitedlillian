@@ -1,4 +1,4 @@
-import { removeItem, selectCartState } from '@/features/slices/cartSlice';
+import { Item, removeItem, selectCartState } from '@/features/slices/cartSlice';
 import useImage from '@/hooks/useImage';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,18 +12,12 @@ const Navbar: React.FC<NavbarProps> = () => {
 	const [cartTotal, setCartTotal] = useState<number>(0);
 
 	const cartState = useSelector(selectCartState);
-	const dispatch = useDispatch();
-	const image = useImage();
 	const mainHeaderRef = useRef<HTMLDivElement>(null);
 	const stickyHeaderRef = useRef<HTMLDivElement>(null);
 	const mobileMenuRef = useRef<HTMLDivElement>(null);
 	// const [iScrollPosition, setIScrollPosition] = useState(0);
 	let iScrollPosition = 0;
 	// const cartTotal = useSelector(selectCartTotal);
-
-	const handleRemoveFromCart = (productId: string) => {
-		dispatch(removeItem(productId));
-	}
 
 	const fixHeader = () => {
 		if (mainHeaderRef.current) {
@@ -120,14 +114,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 											{
 												cartState.slice(0, 2).map((item, index) => {
 													return (
-														<li className="cart-item" key={index}>
-															<Image className="thumb" src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" />
-															{/* <img src={} alt="#" className="thumb" /> */}
-															<span className="item-name">{item.product.name}</span>
-															<span className="item-quantity">{item.qty} x <span className="item-amount">{numeral(item.product.price).format("$0,0.00")}</span></span>
-															<Link href={"/product-details?id=" + item.product.uuid} className="product-detail"></Link>
-															<button className="remove-item" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")}><span className="fa fa-times"></span></button>
-														</li>
+														<CartItem item={item} key={index} />
 													)
 												})
 											}
@@ -228,5 +215,31 @@ const Navbar: React.FC<NavbarProps> = () => {
 		</header>
 	);
 };
+
+interface CartItemProps {
+	item: Item;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
+
+	const image = useImage();
+	const dispatch = useDispatch();
+	// const cartTotal = useSelector(selectCartTotal);
+
+	const handleRemoveFromCart = (productId: string) => {
+		dispatch(removeItem(productId));
+	}
+
+	return (
+		<li className="cart-item">
+			<Image className="thumb" src={image(process.env.NEXT_PUBLIC_API_URL_PUBLIC + item.product.images[0])} width={300} height={300} alt="" />
+			{/* <img src={} alt="#" className="thumb" /> */}
+			<span className="item-name">{item.product.name}</span>
+			<span className="item-quantity">{item.qty} x <span className="item-amount">{numeral(item.product.price).format("$0,0.00")}</span></span>
+			<Link href={"/product-details?id=" + item.product.uuid} className="product-detail"></Link>
+			<button className="remove-item" onClick={() => handleRemoveFromCart(item.product.uuid ?? "")}><span className="fa fa-times"></span></button>
+		</li>
+	);
+}
 
 export default Navbar;
